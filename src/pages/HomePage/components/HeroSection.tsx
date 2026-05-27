@@ -1,4 +1,4 @@
-import landscape1 from "@/assets/homepage/slideshow/landscape1.jpg";
+import landscape from "@/assets/homepage/hero-section/landscape1.jpg";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/utils";
 import { GoDotFill } from "react-icons/go";
@@ -14,7 +14,7 @@ export const HeroSection = (props: HeroSectionProps) => {
     <section className={cn("relative h-dvh w-full overflow-hidden", className)}>
       {/* Background Image - Full Cover */}
       <img
-        src={landscape1}
+        src={landscape}
         alt="Smart Farm Aqua - Agricultural Landscape"
         className="absolute inset-0 h-full w-full object-cover"
       />

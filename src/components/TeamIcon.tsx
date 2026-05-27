@@ -1,5 +1,5 @@
+import imgSrc from "@/assets/sfa-512x512.png";
 import { cn } from "@/utils";
-import imgSrc from "/public/images/sfa-512x512.png";
 
 type Props = {
   className?: string;
