@@ -48,7 +48,9 @@ export const Footer = () => {
       <div className="flex flex-row justify-between">
         <section className="flex w-full flex-col gap-y-4">
           <div className="flex flex-row items-center gap-x-3">
-            <TeamIcon />
+            <div className="border-primary overflow-hidden rounded-xl border-2">
+              <TeamIcon className="size-8" />
+            </div>
             <h4 className="h4 text-white">Smart Farm Aqua</h4>
           </div>
 
@@ -109,6 +111,7 @@ export const Footer = () => {
 
       <div className="mb-12 flex w-full flex-row items-center justify-center gap-x-2 text-center text-sm brightness-60">
         <FaCopyright />
+
         <span className="p m-0!">
           2026 Smart Farm Aqua team. All rights reserved.
         </span>
