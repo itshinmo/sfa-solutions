@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    "target": "ESNext",
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "strict": true,
+    "types": ["vite/client"],
+    "skipLibCheck": true,
+    "allowImportingTsExtensions": false,
+    "verbatimModuleSyntax": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+
+    "erasableSyntaxOnly": true,
+    "allowJs": false,
+    "checkJs": false,
+    "pretty": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    // "rewriteRelativeImportExtensions": true,
+    "noImplicitReturns": true,
+    "noImplicitOverride": true,
+    "noImplicitAny": true,
+    "experimentalDecorators": true,
+    "useDefineForClassFields": false,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noUncheckedSideEffectImports": true
+  },
+
+  "include": ["src", "vite.config.ts"]
+}
