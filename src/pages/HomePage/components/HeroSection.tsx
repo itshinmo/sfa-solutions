@@ -1,5 +1,8 @@
 import landscape from "@/assets/homepage/hero-section/landscape1.jpg";
+import portrait from "@/assets/homepage/hero-section/portrait1.jpg";
+
 import { Button } from "@/components/ui/button";
+import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import { GoDotFill } from "react-icons/go";
 
@@ -10,11 +13,15 @@ type HeroSectionProps = {
 export const HeroSection = (props: HeroSectionProps) => {
   const { className } = props;
 
+  const isMobile = useIsMobile();
+
   return (
-    <section className={cn("relative h-dvh w-full overflow-hidden", className)}>
+    <section
+      className={cn("relative h-screen w-full overflow-hidden", className)}
+    >
       {/* Background Image - Full Cover */}
       <img
-        src={landscape}
+        src={isMobile ? portrait : landscape}
         alt="Smart Farm Aqua - Agricultural Landscape"
         className="absolute inset-0 h-full w-full object-cover"
       />
@@ -23,8 +30,18 @@ export const HeroSection = (props: HeroSectionProps) => {
       <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-black/40" />
 
       {/* Foreground Content */}
-      <div className="desktopContainer relative z-20 mt-48 flex h-full w-full flex-col items-center justify-start gap-y-8 text-center">
-        <h1 className="h1 text-7xl text-white drop-shadow-lg">
+      <div
+        className={cn(
+          "maincontainer relative z-20 flex h-full w-full flex-col items-center justify-start gap-y-8 text-center",
+          isMobile ? "mt-32" : "mt-48",
+        )}
+      >
+        <h1
+          className={cn(
+            "h1 text-white drop-shadow-lg",
+            isMobile ? "text-6xl" : "text-7xl",
+          )}
+        >
           Smarter Water, Stronger Farms
         </h1>
 

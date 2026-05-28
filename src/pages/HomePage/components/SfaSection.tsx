@@ -53,7 +53,7 @@ export const SfaSection = (props: SfaSectionProps) => {
   return (
     <section
       className={cn(
-        "desktopContainer flex w-full flex-col items-center",
+        "maincontainer flex w-full flex-col items-center",
         className,
       )}
     >

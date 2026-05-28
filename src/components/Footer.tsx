@@ -1,6 +1,8 @@
 import { TeamIcon } from "@/components/TeamIcon";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { useIsMobile } from "@/hooks";
+import { cn } from "@/utils";
 import type { JSX } from "react";
 import { FaCopyright, FaFacebook } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -43,9 +45,16 @@ const FooterInfo = (props: FooterInfoProps) => {
 };
 
 export const Footer = () => {
+  const isMobile = useIsMobile();
+
   return (
     <footer className="bg-footer-background text-footer-foreground px-5 py-10">
-      <div className="flex flex-row justify-between">
+      <div
+        className={cn(
+          "flex justify-between",
+          isMobile ? "flex-col gap-y-12" : "flex-row",
+        )}
+      >
         <section className="flex w-full flex-col gap-y-4">
           <div className="flex flex-row items-center gap-x-3">
             <div className="border-primary overflow-hidden rounded-xl border-2">
