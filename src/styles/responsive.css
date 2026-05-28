@@ -1,0 +1,20 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+:root {
+  font-size: 1rem;
+
+  --container-padding-x: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    font-size: 0.8rem;
+
+    --container-padding-x: 1rem;
+  }
+}
+
+@utility maincontainer {
+  @apply px-(--container-padding-x);
+}

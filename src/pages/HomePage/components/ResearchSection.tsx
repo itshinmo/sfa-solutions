@@ -75,7 +75,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
     <section
       ref={sectionRef}
       className={cn(
-        "desktopContainer flex w-full flex-col items-center",
+        "maincontainer flex w-full flex-col items-center",
         className,
       )}
     >

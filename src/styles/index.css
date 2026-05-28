@@ -1,6 +1,7 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "modern-normalize";
+@import "responsive.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -193,23 +194,22 @@
 }
 
 @layer base {
+  html {
+    scrollbar-gutter: stable;
+    width: 100%;
+  }
   #root {
-    @apply primary-gradient;
-    isolation: isolate;
-    width: 100dvw;
+    @apply primary-gradient isolate w-screen;
+    width: 100%;
   }
   body {
     @apply bg-background text-foreground relative;
+    scrollbar-gutter: stable; /* Reserves space for scrollbar */
+    width: 100%;
   }
   * {
     @apply border-border outline-ring/50 box-border;
   }
-}
-
-/* === */
-
-@utility desktopContainer {
-  @apply px-6;
 }
 
 /* === */

@@ -1,6 +1,5 @@
-"use client";
-
 import { Card, CardContent } from "@/components/ui/card";
+import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import { Button } from "@base-ui/react";
 import { AiOutlineGlobal } from "react-icons/ai";
@@ -110,10 +109,12 @@ type TeamSectionProps = {
 };
 
 export const TeamSection = ({ className }: TeamSectionProps) => {
+  const isMobile = useIsMobile();
+
   return (
     <section
       className={cn(
-        "desktopContainer flex w-full flex-col items-center overflow-hidden",
+        "maincontainer flex w-full flex-col items-center overflow-hidden",
         className,
       )}
     >
