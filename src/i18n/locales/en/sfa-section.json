@@ -1,0 +1,15 @@
+{
+  "subtitle": "AI-powered irrigation optimization system designed for arid and semi-arid agriculture.",
+
+  "water-optimization": "Water Optimization",
+  "water-optimization-desc": "SFA determines the optimal irrigation schedule for crops and orchards using advanced yield production functions and mathematical optimization.",
+
+  "ai-assistant": "AI Assistant",
+  "ai-assistant-desc": "Farmers can ask questions in natural language. The system retrieves information from agricultural databases and generates expert advice using AI.",
+
+  "multi-crop-sup": "Multi-Crop Support",
+  "multi-crop-sup-desc": "The model supports 246 crop and orchard species and adapts irrigation schedules according to crop growth stages and water stress sensitivity.",
+
+  "global-applicability": "Global Applicability",
+  "global-applicability-desc": "Designed for arid and semi-arid regions worldwide and compatible with national agricultural datasets and water management systems."
+}

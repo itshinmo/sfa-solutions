@@ -4,6 +4,7 @@ import portrait from "@/assets/homepage/hero-section/portrait1.jpg";
 import { Button } from "@/components/ui/button";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
+import { useTranslation } from "react-i18next";
 import { GoDotFill } from "react-icons/go";
 
 type HeroSectionProps = {
@@ -14,6 +15,7 @@ export const HeroSection = (props: HeroSectionProps) => {
   const { className } = props;
 
   const isMobile = useIsMobile();
+  const { t } = useTranslation(["common"]);
 
   return (
     <section
@@ -42,13 +44,13 @@ export const HeroSection = (props: HeroSectionProps) => {
             isMobile ? "text-6xl" : "text-7xl",
           )}
         >
-          Smarter Water, Stronger Farms
+          {t("smarter-stronger")}
         </h1>
 
         <h2 className="text-primary h2 flex flex-row items-center justify-center gap-x-1.5 text-4xl">
-          <span>SFA</span>
+          <span>{t("sfa")}</span>
           <GoDotFill className="fill-primary size-4" />
-          <span>Smart Farm Aqua</span>
+          <span>{t("sfa-acro")}</span>
         </h2>
 
         <div className="flex flex-row items-center justify-center gap-x-4">
@@ -58,7 +60,7 @@ export const HeroSection = (props: HeroSectionProps) => {
             size="lg"
             className="w-36! font-black!"
           >
-            Start with SFA
+            {t("start-with-sfa")}
           </Button>
           <Button
             color="primary"
@@ -66,7 +68,7 @@ export const HeroSection = (props: HeroSectionProps) => {
             size="lg"
             className="w-36! font-black!"
           >
-            See how it works
+            {t("see-how-it-works")}
           </Button>
         </div>
       </div>

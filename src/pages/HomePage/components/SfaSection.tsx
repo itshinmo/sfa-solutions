@@ -2,6 +2,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils";
 import { motion } from "motion/react";
 import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
 import { FaTractor } from "react-icons/fa";
 import { FaDroplet, FaEarthAsia } from "react-icons/fa6";
 import { LuBrainCircuit } from "react-icons/lu";
@@ -50,6 +51,8 @@ type SfaSectionProps = {
 export const SfaSection = (props: SfaSectionProps) => {
   const { className } = props;
 
+  const { t } = useTranslation(["common", "sfa-section"]);
+
   return (
     <section
       className={cn(
@@ -57,36 +60,35 @@ export const SfaSection = (props: SfaSectionProps) => {
         className,
       )}
     >
-      <h2 className="h1 mb-4">Smart Farm Aqua (SFA)</h2>
+      <h2 className="h1 mb-4">{`${t("sfa-acro")} (${t("sfa")})`}</h2>
 
       <p className="p text-description mb-8 text-center">
-        AI-powered irrigation optimization system designed for arid and
-        semi-arid agriculture.
+        {t("sfa-section:subtitle")}
       </p>
 
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4">
         <SfaCard
           icon={<FaDroplet className="fill-primary size-12" />}
-          title="Water Optimization"
-          description="SFA determines the optimal irrigation schedule for crops and orchards using advanced yield production functions and mathematical optimization."
+          title={t("sfa-section:water-optimization")}
+          description={t("sfa-section:water-optimization-desc")}
         />
 
         <SfaCard
           icon={<LuBrainCircuit className="stroke-primary size-12" />}
-          title="AI Assistant"
-          description="Farmers can ask questions in natural language. The system retrieves information from agricultural databases and generates expert advice using AI."
+          title={t("sfa-section:ai-assistant")}
+          description={t("sfa-section:ai-assistant-desc")}
         />
 
         <SfaCard
           icon={<FaTractor className="fill-primary size-12" />}
-          title="Multi-Crop Support"
-          description="The model supports 246 crop and orchard species and adapts irrigation schedules according to crop growth stages and water stress sensitivity."
+          title={t("sfa-section:multi-crop-sup")}
+          description={t("sfa-section:multi-crop-sup-desc")}
         />
 
         <SfaCard
           icon={<FaEarthAsia className="fill-primary size-12" />}
-          title="Global Applicability"
-          description="Designed for arid and semi-arid regions worldwide and compatible with national agricultural datasets and water management systems."
+          title={t("sfa-section:global-applicability")}
+          description={t("sfa-section:global-applicability-desc")}
         />
       </div>
     </section>

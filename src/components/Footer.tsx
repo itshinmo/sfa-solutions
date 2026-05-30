@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import type { JSX } from "react";
+import { useTranslation } from "react-i18next";
 import { FaCopyright, FaFacebook } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
@@ -47,6 +48,8 @@ const FooterInfo = (props: FooterInfoProps) => {
 export const Footer = () => {
   const isMobile = useIsMobile();
 
+  const { t } = useTranslation(["common", "footer"]);
+
   return (
     <footer className="bg-footer-background text-footer-foreground px-5 py-10">
       <div
@@ -60,11 +63,11 @@ export const Footer = () => {
             <div className="border-primary overflow-hidden rounded-xl border-2">
               <TeamIcon className="size-8" />
             </div>
-            <h4 className="h4 text-white">Smart Farm Aqua</h4>
+            <h4 className="h4 text-white">{t("sfa-acro")}</h4>
           </div>
 
           <p className="p m-0! text-sm font-medium">
-            SFA: Intelligence in every drop.
+            {`${t("sfa")}: ${t("intel-in-drop")}`}
           </p>
 
           <div className="flex flex-row items-center gap-x-2.5">
@@ -87,12 +90,12 @@ export const Footer = () => {
         </section>
 
         <section className="flex w-full flex-col gap-y-4">
-          <h4 className="h4 text-white">Contact info</h4>
+          <h4 className="h4 text-white">{t("footer:contact-info")}</h4>
 
           <div className="flex flex-col gap-y-2">
             <FooterInfo
               icon={<FaLocationDot className="fill-primary" />}
-              title="Tehran, Iran"
+              title={t("footer:contact-info-location")}
             />
 
             <FooterInfo
@@ -107,7 +110,7 @@ export const Footer = () => {
 
             <FooterInfo
               icon={<LuClock className="stroke-primary" />}
-              title="Sat - Wed: 9:00 - 17:00"
+              title={t("footer:contact-info-time")}
             />
           </div>
         </section>
@@ -121,9 +124,7 @@ export const Footer = () => {
       <div className="mb-12 flex w-full flex-row items-center justify-center gap-x-2 text-center text-sm brightness-60">
         <FaCopyright />
 
-        <span className="p m-0!">
-          2026 Smart Farm Aqua team. All rights reserved.
-        </span>
+        <span className="p m-0!">{t("footer:rights-reserved")}</span>
       </div>
     </footer>
   );

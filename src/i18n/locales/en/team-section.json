@@ -1,0 +1,31 @@
+{
+  "sfa-team": "The SFA Team",
+
+  "mohsen-shamsitabar": "Mohsen Shamsitabar",
+  "mohsen-shamsitabar-title": "Web Developer",
+  "mohsen-shamsitabar-desc": "Scalable component developer for modern web experiences",
+
+  "hossein-moradi": "Hossein Moradi Sizkouhi",
+  "hossein-moradi-title": "Lead Software Developer",
+  "hossein-moradi-desc": "Solution architect and engineering lead",
+
+  "kamyar-nakhaie": "Kamyar Nakhaie Khoonikie",
+  "kamyar-nakhaie-title": "AI & Machine Learning Developer",
+  "kamyar-nakhaie-desc": "Advance ML model designer & deployer",
+
+  "soheil-mehrizi": "Soheil Mehrizi",
+  "soheil-mehrizi-title": "AI & Machine Learning Developer",
+  "soheil-mehrizi-desc": "Data analyst and deep learning engineer",
+
+  "arash-tafteh": "Arash Tafteh",
+  "arash-tafteh-title": "Senior Specialist in Agricultural & Water Resource Systems",
+  "arash-tafteh-desc": "Consultant in hydrological modeling & production functions",
+
+  "mahdi-sarai": "Mahdi Sarai Tabrizi",
+  "mahdi-sarai-title": "Project Manager",
+  "mahdi-sarai-desc": "Hydroinformatics specialist in irrigation and drainage",
+
+  "farhad-saeidinejad": "Farhad Saeidinejad",
+  "farhad-saeidinejad-title": "DevOps Engineer",
+  "farhad-saeidinejad-desc": "Deployment & cloud infrastructure manager"
+}
