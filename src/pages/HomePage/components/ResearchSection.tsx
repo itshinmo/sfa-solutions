@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, type JSX } from "react";
 import { CountUp } from "@/components/helpers";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils";
+import { useTranslation } from "react-i18next";
 
 type ResearchCardProps = {
   title: JSX.Element;
@@ -16,6 +17,7 @@ const ResearchCard = (props: ResearchCardProps) => {
 
   return (
     <motion.div
+      dir="ltr"
       initial={{ opacity: 0, y: 24, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{
@@ -49,6 +51,8 @@ export const ResearchSection = (props: ResearchSectionProps) => {
   const sectionRef = useRef<HTMLElement | null>(null);
   const [startCounters, setStartCounters] = useState(false);
 
+  const { t } = useTranslation(["common", "research-section"]);
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -79,7 +83,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
         className,
       )}
     >
-      <h2 className="h1 mb-12">Research Results</h2>
+      <h2 className="h1 mb-12">{t("research-section:results")}</h2>
 
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4">
         <ResearchCard
@@ -96,7 +100,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
               <sup>3</sup>
             </span>
           }
-          description="Water saved per hectare"
+          description={t("research-section:saved-desc")}
         />
 
         <ResearchCard
@@ -112,7 +116,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
               <span> %</span>
             </>
           }
-          description="Reduction in water use"
+          description={t("research-section:reduced-desc")}
         />
 
         <ResearchCard
@@ -128,7 +132,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
               <span> x</span>
             </>
           }
-          description="Increase in water productivity"
+          description={t("research-section:increase-desc")}
         />
 
         <ResearchCard
@@ -143,7 +147,7 @@ export const ResearchSection = (props: ResearchSectionProps) => {
               )}
             </>
           }
-          description="Supported crop species"
+          description={t("research-section:support-desc")}
         />
       </div>
     </section>

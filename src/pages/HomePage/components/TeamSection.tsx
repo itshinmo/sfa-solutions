@@ -3,7 +3,8 @@ import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import { Button } from "@base-ui/react";
 import { motion, useAnimationFrame, useMotionValue } from "motion/react";
-import { useRef } from "react";
+import { useMemo, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
 import { IoIosMail } from "react-icons/io";
@@ -23,7 +24,10 @@ const TeamCard = (props: TeamCardProps) => {
   const { description, title, name, media } = props;
 
   return (
-    <Card className="h-[16.875rem] w-64 shrink-0">
+    <Card
+      dir="ltr"
+      className="h-[16.875rem] w-64 shrink-0"
+    >
       <CardContent className="relative flex h-full flex-col items-center text-center">
         {media && (
           <div className="absolute top-0 right-4 flex flex-col gap-y-2">
@@ -62,49 +66,6 @@ const TeamCard = (props: TeamCardProps) => {
     </Card>
   );
 };
-
-const teamMembers: TeamCardProps[] = [
-  {
-    name: "Mahdi Sarai Tabrizi",
-    title: "Project Manager",
-    description: "Hydroinformatics specialist in irrigation and drainage",
-  },
-  {
-    name: "Arash Tafteh",
-    title: "Senior Specialist in Agricultural & Water Resource Systems",
-    description: "Consultant in hydrological modeling & production functions",
-  },
-  {
-    name: "Hossein Moradi Sizkouhi",
-    title: "Lead Software Developer",
-    description: "Solution architect and engineering lead",
-  },
-  {
-    name: "Mohsen Shamsitabar",
-    title: "Web Developer",
-    description: "Scalable component developer for modern web experiences",
-    media: {
-      email: "test@test.com",
-      website: "https://example.com",
-      linkedin: "asd",
-    },
-  },
-  {
-    name: "Kamyar Nakhaie Khoonikie",
-    title: "AI & Machine Learning Developer",
-    description: "Advance ML model designer & deployer",
-  },
-  {
-    name: "Soheil Mehrizi",
-    title: "AI & Machine Learning Developer",
-    description: "Data analyst and deep learning engineer",
-  },
-  {
-    name: "Farhad Saeidinejad",
-    title: "DevOps Engineer",
-    description: "Deployment & cloud infrastructure manager",
-  },
-];
 
 type TeamMobileCarouselProps = {
   children: React.ReactNode;
@@ -205,14 +166,64 @@ type TeamSectionProps = {
 export const TeamSection = ({ className }: TeamSectionProps) => {
   const isMobile = useIsMobile();
 
+  const { t } = useTranslation(["common", "team-section"]);
+
+  const teamMembers = useMemo<TeamCardProps[]>(
+    () => [
+      {
+        name: t("team-section:mahdi-sarai"),
+        title: t("team-section:mahdi-sarai-title"),
+        description: t("team-section:mahdi-sarai-desc"),
+      },
+      {
+        name: t("team-section:arash-tafteh"),
+        title: t("team-section:arash-tafteh-title"),
+        description: t("team-section:arash-tafteh-desc"),
+      },
+      {
+        name: t("team-section:hossein-moradi"),
+        title: t("team-section:hossein-moradi-title"),
+        description: t("team-section:hossein-moradi-desc"),
+      },
+      {
+        name: t("team-section:mohsen-shamsitabar"),
+        title: t("team-section:mohsen-shamsitabar-title"),
+        description: t("team-section:mohsen-shamsitabar-desc"),
+        media: {
+          email: "test@test.com",
+          website: "https://example.com",
+          linkedin: "asd",
+        },
+      },
+      {
+        name: t("team-section:kamyar-nakhaie"),
+        title: t("team-section:kamyar-nakhaie-title"),
+        description: t("team-section:kamyar-nakhaie-desc"),
+      },
+      {
+        name: t("team-section:soheil-mehrizi"),
+        title: t("team-section:soheil-mehrizi-title"),
+        description: t("team-section:soheil-mehrizi-desc"),
+      },
+      {
+        name: t("team-section:farhad-saeidinejad"),
+        title: t("team-section:farhad-saeidinejad-title"),
+        description: t("team-section:farhad-saeidinejad-desc"),
+      },
+    ],
+    [t],
+  );
+
   return (
     <section
+      dir="ltr"
       className={cn(
         "maincontainer flex w-full flex-col items-center overflow-hidden",
         className,
       )}
     >
-      <h2 className="h1 mb-12">The SFA Team</h2>
+      <h2 className="h1 mb-12">{t("team-section:sfa-team")}</h2>
+
       {isMobile ? (
         <TeamMobileCarousel>
           {teamMembers.map((member, index) => (
