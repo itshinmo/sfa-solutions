@@ -16,8 +16,8 @@
 }
 
 .color--default {
-  --backgroundC: var(--color-background);
-  --foregroundC: var(--color-foreground);
+  --backgroundC: var(--color-sidebar-primary);
+  --foregroundC: var(--color-sidebar-primary-foreground);
   --borderC: var(--color-border);
 }
 .color--primary {
@@ -31,6 +31,7 @@
 }
 .variant--outline {
   color: var(--backgroundC);
+  border-color: var(--backgroundC);
   @apply border bg-transparent;
 }
 
