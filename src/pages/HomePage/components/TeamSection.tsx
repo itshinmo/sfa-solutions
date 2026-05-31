@@ -209,11 +209,6 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
         title: t("team-section:mohsen-shamsitabar-title"),
         image: mohsenShamsitabarImg,
         description: t("team-section:mohsen-shamsitabar-desc"),
-        media: {
-          email: "test@test.com",
-          website: "https://example.com",
-          linkedin: "asd",
-        },
       },
       {
         name: t("team-section:kamyar-nakhaie"),
