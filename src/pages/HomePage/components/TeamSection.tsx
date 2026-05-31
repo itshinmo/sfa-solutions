@@ -1,3 +1,11 @@
+import arashTaftehImg from "@/assets/team/Arash.png";
+import farhadSaeidiImg from "@/assets/team/Farhad.png";
+import hoseinMoradiImg from "@/assets/team/Hossein.png";
+import kamyarNakhaieImg from "@/assets/team/Kamyar.png";
+import mahdiSaraiImg from "@/assets/team/Mahdi.png";
+import mohsenShamsitabarImg from "@/assets/team/Mohsen.png";
+import soheilMehriziImg from "@/assets/team/Soheil.png";
+
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
@@ -12,6 +20,7 @@ import { IoIosMail } from "react-icons/io";
 type TeamCardProps = {
   name: string;
   title: string;
+  image: string;
   description?: string;
   media?: {
     email?: string;
@@ -21,7 +30,7 @@ type TeamCardProps = {
 };
 
 const TeamCard = (props: TeamCardProps) => {
-  const { description, title, name, media } = props;
+  const { description, title, name, media, image } = props;
 
   return (
     <Card
@@ -55,7 +64,14 @@ const TeamCard = (props: TeamCardProps) => {
           </div>
         )}
 
-        <div className="border-primary mb-4 size-24 rounded-full border-2 bg-white" />
+        <div className="border-primary mb-4 size-24 overflow-hidden rounded-full border-2 bg-white">
+          <div className="image-container">
+            <img
+              src={image}
+              alt={`${name}'s avatar`}
+            />
+          </div>
+        </div>
 
         <h5 className="h4 mb-2">{name}</h5>
 
@@ -173,21 +189,25 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
       {
         name: t("team-section:mahdi-sarai"),
         title: t("team-section:mahdi-sarai-title"),
+        image: mahdiSaraiImg,
         description: t("team-section:mahdi-sarai-desc"),
       },
       {
         name: t("team-section:arash-tafteh"),
         title: t("team-section:arash-tafteh-title"),
+        image: arashTaftehImg,
         description: t("team-section:arash-tafteh-desc"),
       },
       {
         name: t("team-section:hossein-moradi"),
         title: t("team-section:hossein-moradi-title"),
+        image: hoseinMoradiImg,
         description: t("team-section:hossein-moradi-desc"),
       },
       {
         name: t("team-section:mohsen-shamsitabar"),
         title: t("team-section:mohsen-shamsitabar-title"),
+        image: mohsenShamsitabarImg,
         description: t("team-section:mohsen-shamsitabar-desc"),
         media: {
           email: "test@test.com",
@@ -198,16 +218,19 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
       {
         name: t("team-section:kamyar-nakhaie"),
         title: t("team-section:kamyar-nakhaie-title"),
+        image: kamyarNakhaieImg,
         description: t("team-section:kamyar-nakhaie-desc"),
       },
       {
         name: t("team-section:soheil-mehrizi"),
         title: t("team-section:soheil-mehrizi-title"),
+        image: soheilMehriziImg,
         description: t("team-section:soheil-mehrizi-desc"),
       },
       {
         name: t("team-section:farhad-saeidinejad"),
         title: t("team-section:farhad-saeidinejad-title"),
+        image: farhadSaeidiImg,
         description: t("team-section:farhad-saeidinejad-desc"),
       },
     ],
