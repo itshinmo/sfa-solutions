@@ -34,7 +34,7 @@ export const HeroSection = (props: HeroSectionProps) => {
       {/* Foreground Content */}
       <div
         className={cn(
-          "maincontainer relative z-20 flex h-full w-full flex-col items-center justify-start gap-y-8 text-center",
+          "maincontainer relative z-20 flex w-full flex-col items-center justify-start gap-y-8 text-center",
           isMobile ? "mt-32" : "mt-48",
         )}
       >

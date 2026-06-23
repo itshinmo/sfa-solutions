@@ -211,6 +211,22 @@ html[lang="fa"] {
   * {
     @apply border-border outline-ring/50 box-border;
   }
+
+  /* LAYOUT - BASED ON VARIABLES */
+
+  header {
+    height: var(--header-height);
+  }
+  main {
+    min-height: var(--main-height);
+  }
+  footer {
+    height: var(--footer-height);
+  }
+}
+
+@utility behind-header {
+  margin-top: calc(var(--header-height) * -1);
 }
 
 /* === */
@@ -246,10 +262,10 @@ html[lang="fa"] {
 }
 
 @utility image-container {
-  @apply flex max-h-full max-w-full shrink-0 items-center justify-center overflow-hidden;
+  @apply flex size-full items-center justify-center overflow-hidden;
 
   & > img {
-    @apply block size-full object-contain;
+    @apply inset-0 block size-full object-cover;
   }
 }
 

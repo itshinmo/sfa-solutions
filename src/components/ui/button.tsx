@@ -12,6 +12,7 @@ const buttonVariants = cva("", {
     variant: {
       default: "",
       outline: "",
+      ghost: "",
     },
     size: {
       default: "",

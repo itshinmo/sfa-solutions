@@ -4,6 +4,10 @@
 :root {
   font-size: 1rem;
 
+  --header-height: 5rem; /* 80px */
+  --footer-height: 27rem; /* 432px */
+  --main-height: calc(100vh - var(--header-height) - var(--footer-height));
+
   --container-padding-x: 1.5rem;
 }
 
@@ -11,10 +15,16 @@
   :root {
     font-size: 0.8rem;
 
+    --footer-height: 36rem; /* 432px */
+
     --container-padding-x: 1rem;
   }
 }
 
 @utility maincontainer {
   @apply px-(--container-padding-x);
+}
+
+@utility blogcontainer {
+  @apply maincontainer mx-auto max-w-4xl;
 }
