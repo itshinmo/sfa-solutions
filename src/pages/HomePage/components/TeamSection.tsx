@@ -49,7 +49,10 @@ const TeamCard = (props: TeamCardProps) => {
             {media.email && (
               <Button
                 onClick={() => {
-                  window.location.href = `mailto:${media.email}`;
+                  window.open(
+                    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(media.email!)}`,
+                    "_blank",
+                  );
                 }}
               >
                 <IoIosMail className="fill-ring size-6 cursor-pointer hover:fill-[#dd4234]" />
@@ -191,24 +194,45 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
         title: t("team-section:mahdi-sarai-title"),
         image: mahdiSaraiImg,
         description: t("team-section:mahdi-sarai-desc"),
+        media: {
+          email: "m.sarai@iau.ac.ir",
+          linkedin:
+            "https://www.linkedin.com/posts/mahdi-sarai-tabrizi-34614443_recklesswithflight-hasabkarajiscientificstatue-activity-7163393383305097216-o6JW",
+          website: "https://zil.ink/mahdi-sarai-tabrizi",
+        },
       },
       {
         name: t("team-section:arash-tafteh"),
         title: t("team-section:arash-tafteh-title"),
         image: arashTaftehImg,
         description: t("team-section:arash-tafteh-desc"),
+        media: {
+          email: "A.tafteh@areeo.ac.ir",
+          linkedin: "https://ir.linkedin.com/in/arash-tafteh-09b1067b",
+          website:
+            "https://scholar.google.com/citations?user=UTmyMe0AAAAJ&hl=en",
+        },
       },
       {
         name: t("team-section:hossein-moradi"),
         title: t("team-section:hossein-moradi-title"),
         image: hoseinMoradiImg,
         description: t("team-section:hossein-moradi-desc"),
+        media: {
+          email: "hx.net1@gmail.com",
+          linkedin:
+            "https://www.linkedin.com/in/hossein-moradi-bb35ab2b2?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+        },
       },
       {
         name: t("team-section:mohsen-shamsitabar"),
         title: t("team-section:mohsen-shamsitabar-title"),
         image: mohsenShamsitabarImg,
         description: t("team-section:mohsen-shamsitabar-desc"),
+        media: {
+          email: "shamsitabar.mohsen@gmail.com",
+          website: "https://github.com/Mohsen-Shamsitabar",
+        },
       },
       {
         name: t("team-section:kamyar-nakhaie"),
@@ -227,6 +251,11 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
         title: t("team-section:farhad-saeidinejad-title"),
         image: farhadSaeidiImg,
         description: t("team-section:farhad-saeidinejad-desc"),
+        media: {
+          email: "farhadsaeidinezhad@gmail.com",
+          linkedin:
+            "https://www.linkedin.com/in/farhad-saeidinezhad-350926304?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
+        },
       },
     ],
     [t],
