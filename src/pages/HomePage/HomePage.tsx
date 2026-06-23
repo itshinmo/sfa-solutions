@@ -1,4 +1,3 @@
-import { Footer, Header } from "@/components";
 import {
   HeroSection,
   ResearchSection,
@@ -8,10 +7,8 @@ import {
 
 export const HomePage = () => {
   return (
-    <div className="primary-gradient relative flex flex-col">
-      <Header />
-
-      <main className="flex w-full flex-col">
+    <main className="behind-header flex w-full flex-col">
+      <div className="primary-gradient relative flex flex-col">
         <HeroSection />
 
         <SfaSection className="py-28" />
@@ -19,9 +16,7 @@ export const HomePage = () => {
         <ResearchSection className="bg-background py-28" />
 
         <TeamSection className="py-28" />
-      </main>
-
-      <Footer />
-    </div>
+      </div>
+    </main>
   );
 };
