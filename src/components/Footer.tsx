@@ -67,7 +67,7 @@ export const Footer = () => {
           </div>
 
           <p className="p m-0! text-sm font-medium">
-            {`${t("sfa")}: ${t("intel-in-drop")}`}
+            {`${t("sfa")}: ${t("slogan-2")}`}
           </p>
 
           <div className="flex flex-row items-center gap-x-2.5">

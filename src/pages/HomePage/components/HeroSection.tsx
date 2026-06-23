@@ -44,7 +44,7 @@ export const HeroSection = (props: HeroSectionProps) => {
             isMobile ? "text-6xl" : "text-7xl",
           )}
         >
-          {t("smarter-stronger")}
+          {t("slogan-1")}
         </h1>
 
         <h2 className="text-primary h2 flex flex-row items-center justify-center gap-x-1.5 text-4xl">
