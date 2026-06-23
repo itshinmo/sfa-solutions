@@ -1,13 +1,15 @@
 import { TeamIcon } from "@/components";
 import { LanguageChanger } from "@/components/LanguageChanger";
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
 import { useTranslation } from "react-i18next";
+import { IoMdPaper } from "react-icons/io";
 
 export const Header = () => {
   const { t } = useTranslation("common");
 
   return (
-    <header className="fixed top-0 right-0 left-0 z-50 border-b border-white/20 shadow-sm backdrop-blur-md">
+    <header className="sticky top-0 right-0 left-0 z-50 border-b border-white/20 shadow-sm backdrop-blur-md">
       <div className="maincontainer flex h-20 items-center justify-between">
         <div className="flex flex-row items-center gap-x-3">
           <div className="border-primary overflow-hidden rounded-xl border-2">
@@ -24,6 +26,17 @@ export const Header = () => {
             </p>
           </div>
         </div>
+
+        {/* NAV */}
+        <nav className="flex flex-row items-center justify-center">
+          <a
+            className="flex flex-row items-center justify-center gap-x-1 text-shadow-2xs"
+            href={`${ROUTES.BLOGS}`}
+          >
+            <IoMdPaper />
+            <span>Blogs</span>
+          </a>
+        </nav>
 
         {/* Actions */}
         <div className="flex items-center gap-x-4">

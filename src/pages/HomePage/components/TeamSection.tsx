@@ -35,7 +35,7 @@ const TeamCard = (props: TeamCardProps) => {
   return (
     <Card
       dir="ltr"
-      className="h-[16.875rem] w-64 shrink-0"
+      className="h-[18rem] w-64 shrink-0"
     >
       <CardContent className="relative flex h-full flex-col items-center text-center">
         {media && (
@@ -64,7 +64,7 @@ const TeamCard = (props: TeamCardProps) => {
           </div>
         )}
 
-        <div className="border-primary mb-4 size-24 overflow-hidden rounded-full border-2 bg-white">
+        <div className="border-primary mb-4 size-24 shrink-0 grow-0 overflow-hidden rounded-full border-2 bg-white">
           <div className="image-container">
             <img
               src={image}
