@@ -2,6 +2,7 @@ import landscape from "@/assets/homepage/hero-section/landscape1.jpg";
 import portrait from "@/assets/homepage/hero-section/portrait1.jpg";
 
 import { Button } from "@/components/ui/button";
+import { ROUTES } from "@/constants/routes";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import { useTranslation } from "react-i18next";
@@ -54,14 +55,17 @@ export const HeroSection = (props: HeroSectionProps) => {
         </h2>
 
         <div className="flex flex-row items-center justify-center gap-x-4">
-          <Button
-            color="primary"
-            variant="default"
-            size="lg"
-            className="w-36! font-black!"
-          >
-            {t("start-with-sfa")}
-          </Button>
+          <a href={`${ROUTES.APP}`}>
+            <Button
+              color="primary"
+              variant="default"
+              size="lg"
+              className="w-36! font-black!"
+            >
+              {t("start-with-sfa")}
+            </Button>
+          </a>
+
           <Button
             color="primary"
             variant="outline"

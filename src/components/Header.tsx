@@ -46,14 +46,16 @@ export const Header = () => {
             size="lg"
           />
 
-          <Button
-            color="primary"
-            variant="default"
-            size="lg"
-            className="font-semibold"
-          >
-            {t("login")}
-          </Button>
+          <a href={`${ROUTES.APP}`}>
+            <Button
+              color="primary"
+              variant="default"
+              size="lg"
+              className="font-semibold"
+            >
+              {t("login")}
+            </Button>
+          </a>
         </div>
       </div>
     </header>
