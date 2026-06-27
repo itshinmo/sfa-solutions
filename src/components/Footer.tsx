@@ -1,3 +1,6 @@
+import bpjLight from "@/assets/bpj-light.png";
+import srbiau from "@/assets/srbiau.png";
+import swri from "@/assets/swri.png";
 import { TeamIcon } from "@/components/TeamIcon";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -114,6 +117,40 @@ export const Footer = () => {
             />
           </div>
         </section>
+      </div>
+
+      <div
+        className={cn(
+          "flex h-24 flex-row items-center gap-x-2",
+          isMobile ? "mt-6 justify-center" : undefined,
+        )}
+      >
+        <div className="h-full">
+          <div className="image-container">
+            <img
+              src={bpjLight}
+              alt="young researchers club logo"
+            />
+          </div>
+        </div>
+
+        <div className="h-full">
+          <div className="image-container">
+            <img
+              src={srbiau}
+              alt="islamic azad university, science and research branch logo"
+            />
+          </div>
+        </div>
+
+        <div className="h-full overflow-hidden rounded-full border bg-white p-1">
+          <div className="image-container">
+            <img
+              src={swri}
+              alt="soil and water research institude logo"
+            />
+          </div>
+        </div>
       </div>
 
       <Separator
