@@ -239,12 +239,20 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
         title: t("team-section:kamyar-nakhaie-title"),
         image: kamyarNakhaieImg,
         description: t("team-section:kamyar-nakhaie-desc"),
+        media: {
+          website: "https://github.com/thekampiler-code",
+        },
       },
       {
         name: t("team-section:soheil-mehrizi"),
         title: t("team-section:soheil-mehrizi-title"),
         image: soheilMehriziImg,
         description: t("team-section:soheil-mehrizi-desc"),
+        media: {
+          linkedin:
+            "https://www.linkedin.com/in/soheilmehrizi?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+          email: "mehrizisoheil@gmail.com",
+        },
       },
       {
         name: t("team-section:farhad-saeidinejad"),
