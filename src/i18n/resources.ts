@@ -1,3 +1,4 @@
+import achievementSection from "./locales/en/achievement-section.json";
 import common from "./locales/en/common.json";
 import footer from "./locales/en/footer.json";
 import researchSection from "./locales/en/research-section.json";
@@ -10,6 +11,7 @@ export const resources = {
   "research-section": researchSection,
   "sfa-section": sfaSection,
   "team-section": teamSection,
+  "achievement-section": achievementSection,
 } as const;
 
 export type DefaultNamespace = "common";

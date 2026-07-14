@@ -1,3 +1,4 @@
+export * from "./AchievementSection";
 export * from "./HeroSection";
 export * from "./ResearchSection";
 export * from "./SfaSection";

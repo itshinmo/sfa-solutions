@@ -1,4 +1,5 @@
 import {
+  AchievementSection,
   HeroSection,
   ResearchSection,
   SfaSection,
@@ -15,7 +16,9 @@ export const HomePage = () => {
 
         <ResearchSection className="bg-background py-28" />
 
-        <TeamSection className="py-28" />
+        <AchievementSection className="py-28" />
+
+        <TeamSection className="bg-background py-28" />
       </div>
     </main>
   );

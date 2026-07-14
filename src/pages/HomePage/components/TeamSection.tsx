@@ -35,7 +35,7 @@ const TeamCard = (props: TeamCardProps) => {
   return (
     <Card
       dir="ltr"
-      className="h-[18rem] w-64 shrink-0"
+      className="h-[18rem] w-64 shrink-0 shadow-md"
     >
       <CardContent className="relative flex h-full flex-col items-center text-center">
         {media && (
