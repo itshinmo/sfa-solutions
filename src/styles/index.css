@@ -214,13 +214,15 @@ html[lang="fa"] {
 
   /* LAYOUT - BASED ON VARIABLES */
 
-  header {
+  #main-layout > header {
     height: var(--header-height);
   }
-  main {
+
+  #main-layout > main {
     min-height: var(--main-height);
   }
-  footer {
+
+  #main-layout > footer {
     height: var(--footer-height);
   }
 }
