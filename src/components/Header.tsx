@@ -10,7 +10,7 @@ export const Header = () => {
 
   return (
     <header className="sticky top-0 right-0 left-0 z-50 border-b border-white/20 shadow-sm backdrop-blur-md">
-      <div className="maincontainer flex h-20 items-center justify-between">
+      <div className="maincontainer flex h-20 items-center">
         <a href={`${ROUTES.HOME}`}>
           <div className="flex flex-row items-center gap-x-3">
             <div className="border-primary overflow-hidden rounded-xl border-2">
@@ -30,18 +30,18 @@ export const Header = () => {
         </a>
 
         {/* NAV */}
-        <nav className="flex flex-row items-center justify-center">
+        <nav className="ms-8 flex flex-row items-center justify-center">
           <a
             className="flex flex-row items-center justify-center gap-x-1 text-shadow-2xs"
             href={`${ROUTES.BLOGS}`}
           >
             <IoMdPaper />
-            <span>Blogs</span>
+            <span>{t("blogs")}</span>
           </a>
         </nav>
 
         {/* Actions */}
-        <div className="flex items-center gap-x-4">
+        <div className="ms-auto flex items-center gap-x-4">
           <LanguageChanger
             color="default"
             variant="outline"
