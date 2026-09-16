@@ -3,6 +3,7 @@ import BLOGS_DATA from "@/constants/blogs-data";
 import { ROUTES } from "@/constants/routes";
 import { MainLayout } from "@/layouts";
 import { BlogsPage, HomePage, NotFoundPage } from "@/pages";
+import { FeedbackPage } from "@/pages/FeedbackPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -50,6 +51,11 @@ const App = () => {
               />
 
               <Route path={ROUTES.BLOG}>{setupBlogsRouting()}</Route>
+
+              <Route
+                path={ROUTES.FEEDBACK}
+                element={<FeedbackPage />}
+              />
             </Route>
 
             <Route
