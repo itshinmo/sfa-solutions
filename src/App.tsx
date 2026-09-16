@@ -3,6 +3,7 @@ import BLOGS_DATA from "@/constants/blogs-data";
 import { ROUTES } from "@/constants/routes";
 import { MainLayout } from "@/layouts";
 import { BlogsPage, HomePage, NotFoundPage } from "@/pages";
+import { AdminDashboardPage } from "@/pages/AdminDashboardPage";
 import { FeedbackPage } from "@/pages/FeedbackPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect } from "react";
@@ -55,6 +56,11 @@ const App = () => {
               <Route
                 path={ROUTES.FEEDBACK}
                 element={<FeedbackPage />}
+              />
+
+              <Route
+                path={ROUTES.ADMIN_DASHBOARD}
+                element={<AdminDashboardPage />}
               />
             </Route>
 

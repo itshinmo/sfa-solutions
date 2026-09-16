@@ -3,6 +3,7 @@ const BLOGS = "/blogs";
 const BLOG = "/blog";
 const APP = "/app";
 const FEEDBACK = "/feedback";
+const ADMIN_DASHBOARD = "admin-dashboard";
 
 export const ROUTES = {
   HOME,
@@ -10,4 +11,5 @@ export const ROUTES = {
   BLOG,
   APP,
   FEEDBACK,
+  ADMIN_DASHBOARD,
 } as const;
