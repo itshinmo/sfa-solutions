@@ -7,6 +7,7 @@ import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
 import { useTranslation } from "react-i18next";
 import { GoDotFill } from "react-icons/go";
+import { Link } from "react-router";
 
 type HeroSectionProps = {
   className?: string;
@@ -55,7 +56,7 @@ export const HeroSection = (props: HeroSectionProps) => {
         </h2>
 
         <div className="flex flex-row items-center justify-center gap-x-4">
-          <a href={`${ROUTES.APP}`}>
+          <Link to={`${ROUTES.APP}`}>
             <Button
               color="primary"
               variant="default"
@@ -64,7 +65,7 @@ export const HeroSection = (props: HeroSectionProps) => {
             >
               {t("start-with-sfa")}
             </Button>
-          </a>
+          </Link>
 
           <Button
             color="primary"

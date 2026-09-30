@@ -26,7 +26,7 @@ const App = () => {
     return BLOGS_DATA.map(blogData => {
       return (
         <Route
-          path={`${ROUTES.BLOG}/${blogData.id}`}
+          path={`${blogData.id}`}
           element={blogData.component}
         />
       );
@@ -46,12 +46,14 @@ const App = () => {
                 index
               />
 
-              <Route
-                path={ROUTES.BLOGS}
-                element={<BlogsPage />}
-              />
+              <Route path={ROUTES.BLOGS}>
+                <Route
+                  index
+                  element={<BlogsPage />}
+                />
 
-              <Route path={ROUTES.BLOG}>{setupBlogsRouting()}</Route>
+                {setupBlogsRouting()}
+              </Route>
 
               <Route
                 path={ROUTES.FEEDBACK}

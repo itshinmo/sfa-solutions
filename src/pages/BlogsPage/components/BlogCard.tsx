@@ -1,11 +1,11 @@
 import { Card, CardAction, CardContent } from "@/components/ui/card";
-import { ROUTES } from "@/constants/routes";
 import { useIsMobile } from "@/hooks";
 import type { BlogData } from "@/types/blog";
 import { cn } from "@/utils";
 import { motion } from "motion/react";
 import { useMemo } from "react";
 import { FaChevronRight } from "react-icons/fa";
+import { Link } from "react-router";
 
 type Props = {
   blogData: BlogData;
@@ -15,7 +15,7 @@ const BlogCard = (props: Props) => {
   const { blogData } = props;
   const { description, id, title, thumbnail } = blogData;
 
-  const href = useMemo(() => `${ROUTES.BLOG}/${id}`, [ROUTES, id]);
+  const href = useMemo(() => `${id}`, [id]);
 
   const isMobile = useIsMobile();
 
@@ -27,17 +27,19 @@ const BlogCard = (props: Props) => {
         <CardContent className="size-full">
           <article className="size-full">
             <div className="border-border aspect-video w-full overflow-hidden rounded-md border">
-              <div className="image-container">
-                <img
-                  src={thumbnail}
-                  alt={`${title} thumbnail`}
-                />
-              </div>
+              <Link to={href}>
+                <div className="image-container">
+                  <img
+                    src={thumbnail}
+                    alt={`${title} thumbnail`}
+                  />
+                </div>
+              </Link>
             </div>
 
             <div className="mt-3 flex flex-col justify-between gap-y-2">
               <h2 className="text-primary h4">
-                <a href={href}>{title}</a>
+                <Link to={href}>{title}</Link>
               </h2>
 
               <p className="text-description line-clamp-4 text-xs">
@@ -49,13 +51,13 @@ const BlogCard = (props: Props) => {
 
         <CardAction>
           <div className="ps-4 text-xs font-medium">
-            <a
-              href={href}
+            <Link
+              to={href}
               className="text-primary flex w-fit flex-row items-center gap-x-2 transition-transform hover:brightness-75 active:translate-y-0.5 active:brightness-50"
             >
               <span>READ MORE...</span>
               <FaChevronRight />
-            </a>
+            </Link>
           </div>
         </CardAction>
       </Card>
