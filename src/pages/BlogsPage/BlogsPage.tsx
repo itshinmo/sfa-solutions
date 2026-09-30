@@ -4,7 +4,12 @@ import BlogCard from "@/pages/BlogsPage/components/BlogCard";
 export const BlogsPage = () => {
   const renderAllBlogCards = () => {
     return BLOGS_DATA.map(blogData => {
-      return <BlogCard blogData={blogData} />;
+      return (
+        <BlogCard
+          key={blogData.id}
+          blogData={blogData}
+        />
+      );
     });
   };
 
