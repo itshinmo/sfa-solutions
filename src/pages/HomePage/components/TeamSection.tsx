@@ -1,5 +1,4 @@
 import arashTaftehImg from "@/assets/team/Arash.png";
-import farhadSaeidiImg from "@/assets/team/Farhad.png";
 import hoseinMoradiImg from "@/assets/team/Hossein.png";
 import kamyarNakhaieImg from "@/assets/team/Kamyar.png";
 import mahdiSaraiImg from "@/assets/team/Mahdi.png";
@@ -68,7 +67,7 @@ const TeamCard = (props: TeamCardProps) => {
         )}
 
         <div className="border-primary mb-4 size-24 shrink-0 grow-0 overflow-hidden rounded-full border-2 bg-white">
-          <div className="image-container">
+          <div className="image-container pointer-events-none">
             <img
               src={image}
               alt={`${name}'s avatar`}
@@ -252,17 +251,6 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
           linkedin:
             "https://www.linkedin.com/in/soheilmehrizi?utm_source=share_via&utm_content=profile&utm_medium=member_android",
           email: "mehrizisoheil@gmail.com",
-        },
-      },
-      {
-        name: t("team-section:farhad-saeidinejad"),
-        title: t("team-section:farhad-saeidinejad-title"),
-        image: farhadSaeidiImg,
-        description: t("team-section:farhad-saeidinejad-desc"),
-        media: {
-          email: "farhadsaeidinezhad@gmail.com",
-          linkedin:
-            "https://www.linkedin.com/in/farhad-saeidinezhad-350926304?utm_source=share_via&utm_content=profile&utm_medium=member_ios",
         },
       },
     ],
