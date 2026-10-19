@@ -7,6 +7,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import type { SupportedLanguage } from "@/i18n/resources";
 import type { VariantProps } from "class-variance-authority";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,6 +17,14 @@ import { GrLanguage } from "react-icons/gr";
 type Props = {
   className?: string;
 } & VariantProps<typeof buttonVariants>;
+
+const LANGUAGES: readonly {
+  value: SupportedLanguage;
+  labelKey: "english" | "farsi";
+}[] = [
+  { value: "en", labelKey: "english" },
+  { value: "fa", labelKey: "farsi" },
+];
 
 export const LanguageChanger = (props: Props) => {
   const {
@@ -29,28 +38,22 @@ export const LanguageChanger = (props: Props) => {
 
   const { t, i18n } = useTranslation("common");
 
-  const handleOnOpenchange = (open: boolean) => {
-    setIsOpen(open);
-  };
+  const currentLanguage =
+    (i18n.resolvedLanguage ?? i18n.language) === "fa" ? "fa" : "en";
 
-  const handleOnEnglishClick = () => {
-    i18n.changeLanguage("en");
-  };
+  const currentLabel = t(
+    LANGUAGES.find(language => language.value === currentLanguage)?.labelKey ??
+      "english",
+  );
 
-  const handleOnFarsiClick = () => {
-    i18n.changeLanguage("fa");
-  };
-
-  const renderChevron = () => {
-    if (isOpen) return <FaChevronUp />;
-
-    return <FaChevronDown />;
+  const handleLanguageChange = (language: SupportedLanguage) => {
+    void i18n.changeLanguage(language);
   };
 
   return (
     <DropdownMenu
       open={isOpen}
-      onOpenChange={handleOnOpenchange}
+      onOpenChange={setIsOpen}
     >
       <DropdownMenuTrigger
         render={
@@ -59,10 +62,11 @@ export const LanguageChanger = (props: Props) => {
             color={color}
             size={size}
             className={className}
+            aria-label={t("languages")}
           >
             <GrLanguage />
-            <span>{i18n.language}</span>
-            {renderChevron()}
+            <span className="hidden sm:inline">{currentLabel}</span>
+            {isOpen ? <FaChevronUp /> : <FaChevronDown />}
           </Button>
         }
       />
@@ -70,19 +74,16 @@ export const LanguageChanger = (props: Props) => {
       <DropdownMenuContent>
         <DropdownMenuGroup>
           <DropdownMenuLabel>{t("languages")}</DropdownMenuLabel>
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={handleOnEnglishClick}
-          >
-            {t("english")}
-          </DropdownMenuItem>
 
-          <DropdownMenuItem
-            className="cursor-pointer"
-            onClick={handleOnFarsiClick}
-          >
-            {t("farsi")}
-          </DropdownMenuItem>
+          {LANGUAGES.map(language => (
+            <DropdownMenuItem
+              key={language.value}
+              className="cursor-pointer"
+              onClick={() => handleLanguageChange(language.value)}
+            >
+              {t(language.labelKey)}
+            </DropdownMenuItem>
+          ))}
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

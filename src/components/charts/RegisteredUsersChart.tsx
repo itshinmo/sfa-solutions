@@ -34,7 +34,7 @@ const chartConfig = {
   },
 } satisfies ChartConfig;
 
-export const RegisteredUserChart = () => {
+export const RegisteredUsersChart = () => {
   return (
     <Card>
       <CardHeader>

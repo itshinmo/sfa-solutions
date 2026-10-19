@@ -1,49 +1,58 @@
+import { PageLoader } from "@/components/helpers";
 import { Toaster } from "@/components/ui/toaster";
-import BLOGS_DATA from "@/constants/blogs-data";
 import { ROUTES } from "@/constants/routes";
 import { MainLayout } from "@/layouts";
-import { BlogsPage, HomePage, NotFoundPage } from "@/pages";
-import { AdminDashboardPage } from "@/pages/AdminDashboardPage";
-import { FeedbackPage } from "@/pages/FeedbackPage";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import { queryClient } from "@/lib/query-client";
+import { HomePage } from "@/pages/HomePage";
+import { QueryClientProvider } from "@tanstack/react-query";
+import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Routes } from "react-router";
 
-const queryClient = new QueryClient();
+// Secondary routes are split into their own chunks. This keeps the initial
+// bundle small (the blog articles, charts, and 404 animation are not needed on
+// the home page).
+const BlogsPage = lazy(async () => {
+  const module = await import("@/pages/BlogsPage");
+
+  return { default: module.BlogsPage };
+});
+
+const BlogPostPage = lazy(async () => {
+  const module = await import("@/pages/BlogsPage");
+
+  return { default: module.BlogPostPage };
+});
+
+const FeedbackPage = lazy(async () => {
+  const module = await import("@/pages/FeedbackPage");
+
+  return { default: module.FeedbackPage };
+});
+
+const AdminDashboardPage = lazy(async () => {
+  const module = await import("@/pages/AdminDashboardPage");
+
+  return { default: module.AdminDashboardPage };
+});
+
+const NotFoundPage = lazy(async () => {
+  const module = await import("@/pages/NotFoundPage");
+
+  return { default: module.NotFoundPage };
+});
 
 const App = () => {
-  const { i18n } = useTranslation();
-
-  useEffect(() => {
-    const isRTL = i18n.language === "fa";
-
-    document.documentElement.dir = isRTL ? "rtl" : "ltr";
-    document.documentElement.lang = i18n.language;
-  }, [i18n.language]);
-
-  const setupBlogsRouting = () => {
-    return BLOGS_DATA.map(blogData => {
-      return (
-        <Route
-          path={`${blogData.id}`}
-          element={blogData.component}
-        />
-      );
-    });
-  };
-
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <Toaster />
 
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route element={<MainLayout />}>
               <Route
-                element={<HomePage />}
                 index
+                element={<HomePage />}
               />
 
               <Route path={ROUTES.BLOGS}>
@@ -52,7 +61,10 @@ const App = () => {
                   element={<BlogsPage />}
                 />
 
-                {setupBlogsRouting()}
+                <Route
+                  path=":blogId"
+                  element={<BlogPostPage />}
+                />
               </Route>
 
               <Route
@@ -71,9 +83,9 @@ const App = () => {
               element={<NotFoundPage />}
             />
           </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </>
+        </Suspense>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 };
 

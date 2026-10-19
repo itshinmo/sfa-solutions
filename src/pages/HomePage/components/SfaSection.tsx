@@ -21,15 +21,8 @@ const SfaCard = (props: SfaCardProps) => {
     <motion.div
       initial={{ opacity: 0, y: 24, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{
-        once: true, // animate only first time
-        amount: 0.35,
-      }}
-      transition={{
-        duration: 0.75,
-        delay,
-        ease: "easeOut",
-      }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.75, delay, ease: "easeOut" }}
     >
       <Card className="h-60 w-64">
         <CardContent className="flex h-full flex-col items-center text-center">
@@ -47,6 +40,29 @@ const SfaCard = (props: SfaCardProps) => {
 type SfaSectionProps = {
   className?: string;
 };
+
+const FEATURES = [
+  {
+    key: "water-optimization",
+    Icon: FaDroplet,
+    iconClassName: "fill-primary size-12",
+  },
+  {
+    key: "ai-assistant",
+    Icon: LuBrainCircuit,
+    iconClassName: "stroke-primary size-12",
+  },
+  {
+    key: "multi-crop-sup",
+    Icon: FaTractor,
+    iconClassName: "fill-primary size-12",
+  },
+  {
+    key: "global-applicability",
+    Icon: FaEarthAsia,
+    iconClassName: "fill-primary size-12",
+  },
+] as const;
 
 export const SfaSection = (props: SfaSectionProps) => {
   const { className } = props;
@@ -67,29 +83,14 @@ export const SfaSection = (props: SfaSectionProps) => {
       </p>
 
       <div className="flex w-full flex-row flex-wrap items-center justify-center gap-4">
-        <SfaCard
-          icon={<FaDroplet className="fill-primary size-12" />}
-          title={t("sfa-section:water-optimization")}
-          description={t("sfa-section:water-optimization-desc")}
-        />
-
-        <SfaCard
-          icon={<LuBrainCircuit className="stroke-primary size-12" />}
-          title={t("sfa-section:ai-assistant")}
-          description={t("sfa-section:ai-assistant-desc")}
-        />
-
-        <SfaCard
-          icon={<FaTractor className="fill-primary size-12" />}
-          title={t("sfa-section:multi-crop-sup")}
-          description={t("sfa-section:multi-crop-sup-desc")}
-        />
-
-        <SfaCard
-          icon={<FaEarthAsia className="fill-primary size-12" />}
-          title={t("sfa-section:global-applicability")}
-          description={t("sfa-section:global-applicability-desc")}
-        />
+        {FEATURES.map(({ key, Icon, iconClassName }) => (
+          <SfaCard
+            key={key}
+            icon={<Icon className={iconClassName} />}
+            title={t(`sfa-section:${key}`)}
+            description={t(`sfa-section:${key}-desc`)}
+          />
+        ))}
       </div>
     </section>
   );

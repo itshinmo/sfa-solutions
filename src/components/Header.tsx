@@ -1,7 +1,8 @@
-import { TeamIcon } from "@/components";
 import { LanguageChanger } from "@/components/LanguageChanger";
+import { TeamIcon } from "@/components/TeamIcon";
 import { Button } from "@/components/ui/button";
 import { ROUTES } from "@/constants/routes";
+import { cn } from "@/utils";
 import { useTranslation } from "react-i18next";
 import { IoMdPaper } from "react-icons/io";
 import { Link, NavLink } from "react-router";
@@ -10,55 +11,60 @@ export const Header = () => {
   const { t } = useTranslation("common");
 
   return (
-    <header className="sticky top-0 right-0 left-0 z-50 border-b border-white/20 shadow-sm backdrop-blur-md">
-      <div className="maincontainer flex h-20 items-center">
-        <Link to={`${ROUTES.HOME}`}>
-          <div className="flex flex-row items-center gap-x-3">
-            <div className="border-primary overflow-hidden rounded-xl border-2">
-              <TeamIcon className="size-8" />
-            </div>
+    <header className="bg-background/90 sticky top-0 right-0 left-0 z-50 border-b shadow-sm">
+      <div className="maincontainer flex h-(--header-height) items-center gap-3">
+        <Link
+          to={ROUTES.HOME}
+          className="flex shrink-0 items-center gap-x-3"
+        >
+          <div className="border-primary overflow-hidden rounded-xl border-2">
+            <TeamIcon className="size-8" />
+          </div>
 
-            <div>
-              <h5 className="text-foreground text-2xl font-bold tracking-tight">
-                {t("sfa-solutions")}
-              </h5>
+          <div>
+            <h5 className="text-foreground text-2xl font-bold tracking-tight">
+              {t("sfa-solutions")}
+            </h5>
 
-              <p className="text-muted-foreground -mt-1 text-[10px]">
-                {t("sfa-acro")}
-              </p>
-            </div>
+            <p className="text-muted-foreground -mt-1 hidden text-[10px] sm:block">
+              {t("sfa-acro")}
+            </p>
           </div>
         </Link>
 
-        {/* NAV */}
-        <nav className="ms-8 flex flex-row items-center justify-center">
+        <nav className="ms-4 flex items-center md:ms-8">
           <NavLink
-            to={`${ROUTES.BLOGS}`}
-            className="flex flex-row items-center justify-center gap-x-1 text-shadow-2xs"
+            to={ROUTES.BLOGS}
+            aria-label={t("blogs")}
+            className={({ isActive }) =>
+              cn(
+                "hover:text-primary flex items-center justify-center gap-x-1 transition-colors text-shadow-2xs",
+                isActive ? "text-primary font-semibold" : "text-foreground",
+              )
+            }
           >
             <IoMdPaper />
-            <span>{t("blogs")}</span>
+            <span className="hidden sm:inline">{t("blogs")}</span>
           </NavLink>
         </nav>
 
-        {/* Actions */}
-        <div className="ms-auto flex items-center gap-x-4">
+        <div className="ms-auto flex items-center gap-x-2 sm:gap-x-4">
           <LanguageChanger
             color="default"
             variant="outline"
             size="lg"
           />
 
-          <Link to={`${ROUTES.APP}`}>
-            <Button
-              color="primary"
-              variant="default"
-              size="lg"
-              className="font-semibold"
-            >
-              {t("login")}
-            </Button>
-          </Link>
+          <Button
+            color="primary"
+            variant="default"
+            size="lg"
+            className="font-semibold"
+            nativeButton={false}
+            render={<Link to={ROUTES.APP} />}
+          >
+            {t("login")}
+          </Button>
         </div>
       </div>
     </header>

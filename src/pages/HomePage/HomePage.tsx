@@ -1,3 +1,4 @@
+import { usePageTitle } from "@/hooks";
 import {
   AchievementSection,
   HeroSection,
@@ -7,6 +8,8 @@ import {
 } from "./components";
 
 export const HomePage = () => {
+  usePageTitle();
+
   return (
     <main className="behind-header flex w-full flex-col">
       <div className="primary-gradient relative flex flex-col">

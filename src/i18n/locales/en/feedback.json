@@ -1,0 +1,39 @@
+{
+  "title": "Feedback",
+  "subtitle": "Found a bug or have a suggestion? Let us know.",
+  "category": "Category",
+  "category-placeholder": "Select category",
+  "title-label": "Title",
+  "title-placeholder": "Performance issue",
+  "content": "Issue",
+  "content-placeholder": "Type here.",
+  "image": "Image",
+  "image-description": "Optional screenshot (max 5 MB).",
+  "submit": "Submit",
+  "submitting": "Submitting…",
+  "success": "Thanks! Your feedback was submitted.",
+  "error": "Something went wrong. Please try again.",
+  "required": "This field is required.",
+  "min-length": "Enter at least {{count}} characters.",
+  "image-too-large": "The image must be smaller than 5 MB.",
+  "categories": {
+    "website": "Website",
+    "app": "App",
+    "payment": "Payment"
+  },
+  "table": {
+    "title": "Recent feedback",
+    "description": "The latest tickets submitted by our users.",
+    "empty": "No feedback has been submitted yet.",
+    "columns": {
+      "title": "Title",
+      "category": "Category",
+      "status": "Status",
+      "submitted": "Submitted"
+    },
+    "status": {
+      "open": "Open",
+      "resolved": "Resolved"
+    }
+  }
+}

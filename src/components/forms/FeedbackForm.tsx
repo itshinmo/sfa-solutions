@@ -2,106 +2,112 @@ import { ImageField } from "@/components/fields/ImageField";
 import { InputField } from "@/components/fields/InputField";
 import { SelectField } from "@/components/fields/SelectField";
 import { TextareaField } from "@/components/fields/TextareaField";
+import {
+  createFeedbackSchema,
+  FEEDBACK_CATEGORY_VALUES,
+  type FeedbackFormValues,
+} from "@/components/forms/feedback-schema";
 import { Button } from "@/components/ui/button";
+import { submitFeedback } from "@/services/feedback";
 import type { SelectOption } from "@/types/fields";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useMemo } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import z from "zod";
-
-const SETTINGS = {
-  min: 3,
-  minError: "Enter more than 3 characters!",
-} as const;
-
-const feedbackFormSchema = z.object({
-  category: z.string().nonempty().nonoptional(),
-  title: z.string().min(SETTINGS.min, { error: SETTINGS.minError }),
-  content: z.string().min(SETTINGS.min, { error: SETTINGS.minError }),
-  img: z.instanceof(File).optional().nullable(),
-});
-
-type FeedbackFormSchema = z.infer<typeof feedbackFormSchema>;
-
-const TICKET_CATEGORIES: SelectOption[] = [
-  {
-    value: "website",
-    label: "Website",
-  },
-  {
-    value: "app",
-    label: "App",
-  },
-  {
-    value: "payment",
-    label: "Payment",
-  },
-];
+import { useTranslation } from "react-i18next";
+import { toast } from "sonner";
 
 export const FeedbackForm = () => {
-  const form = useForm<FeedbackFormSchema>({
-    resolver: zodResolver(feedbackFormSchema),
+  const { t } = useTranslation("feedback");
+
+  const schema = useMemo(() => createFeedbackSchema(t), [t]);
+
+  const categoryOptions = useMemo<SelectOption[]>(
+    () =>
+      FEEDBACK_CATEGORY_VALUES.map(category => ({
+        value: category,
+        label: t(`categories.${category}`),
+      })),
+    [t],
+  );
+
+  const form = useForm<FeedbackFormValues>({
+    resolver: zodResolver(schema),
     defaultValues: {
-      category: "",
+      category: undefined,
       title: "",
       content: "",
       img: null,
     },
   });
 
-  const onSubmit = async (values: FeedbackFormSchema) => {
-    const formData = new FormData();
+  const mutation = useMutation({
+    mutationFn: submitFeedback,
+    onSuccess: () => {
+      toast.success(t("success"));
+      form.reset();
+    },
+    onError: () => {
+      toast.error(t("error"));
+    },
+  });
 
-    formData.append("category", values.category);
-    formData.append("title", values.title);
-    formData.append("content", values.content);
-
-    if (values.img) {
-      formData.append("img", values.img);
-    }
-
-    console.log("success", formData);
+  const onSubmit = (values: FeedbackFormValues) => {
+    mutation.mutate({
+      category: values.category,
+      title: values.title,
+      content: values.content,
+      image: values.img,
+    });
   };
 
   return (
     <FormProvider {...form}>
       <form
+        noValidate
         className="flex flex-col gap-y-4"
         onSubmit={form.handleSubmit(onSubmit)}
       >
-        <h2 className="h2 mb-6">Feedback</h2>
+        <div>
+          <h2 className="h2 mb-1">{t("title")}</h2>
+          <p className="text-description">{t("subtitle")}</p>
+        </div>
 
-        <div className="flex flex-row gap-x-4">
-          <SelectField<FeedbackFormSchema>
+        <div className="flex flex-col gap-4 sm:flex-row">
+          <SelectField<FeedbackFormValues>
             name="category"
-            label="Category"
-            options={TICKET_CATEGORIES}
-            placeholder="Select category"
+            label={t("category")}
+            options={categoryOptions}
+            placeholder={t("category-placeholder")}
           />
 
-          <InputField<FeedbackFormSchema>
+          <InputField<FeedbackFormValues>
             name="title"
-            label="Title"
-            placeholder="performance issue"
+            label={t("title-label")}
+            placeholder={t("title-placeholder")}
           />
         </div>
 
-        <TextareaField<FeedbackFormSchema>
+        <TextareaField<FeedbackFormValues>
           name="content"
-          label="Issue"
-          placeholder="Type here."
+          label={t("content")}
+          placeholder={t("content-placeholder")}
         />
 
-        <ImageField<FeedbackFormSchema>
+        <ImageField<FeedbackFormValues>
           name="img"
-          label="Image"
+          label={t("image")}
+          description={t("image-description")}
         />
 
         <Button
           type="submit"
           variant="default"
           color="primary"
+          size="lg"
+          disabled={mutation.isPending}
         >
-          Submit
+          {mutation.isPending ? t("submitting") : t("submit")}
         </Button>
       </form>
     </FormProvider>

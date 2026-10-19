@@ -17,7 +17,7 @@ const SoilTextureTriangle = () => {
           specialized concepts from field and agricultural management.
         </p>
 
-        <div className="mx-auto w-xs">
+        <div className="mx-auto w-full max-w-xs">
           <div className="image-container">
             <img
               src={STTThumbnail}

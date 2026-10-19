@@ -3,26 +3,26 @@ import { cn } from "@/utils";
 import { Button as ButtonPrimitive } from "@base-ui/react/button";
 import { cva, type VariantProps } from "class-variance-authority";
 
-const buttonVariants = cva("", {
+const buttonVariants = cva(classes.root, {
   variants: {
     color: {
-      default: "",
-      primary: "",
+      default: classes["color--default"],
+      primary: classes["color--primary"],
     },
     variant: {
-      default: "",
-      outline: "",
-      ghost: "",
+      default: classes["variant--default"],
+      outline: classes["variant--outline"],
+      ghost: classes["variant--ghost"],
     },
     size: {
-      default: "",
-      xs: "",
-      sm: "",
-      lg: "",
-      icon: "",
-      "icon-xs": "",
-      "icon-sm": "",
-      "icon-lg": "",
+      default: classes["size--default"],
+      xs: classes["size--xs"],
+      sm: classes["size--sm"],
+      lg: classes["size--lg"],
+      icon: classes["size--icon"],
+      "icon-xs": classes["size--icon-xs"],
+      "icon-sm": classes["size--icon-sm"],
+      "icon-lg": classes["size--icon-lg"],
     },
   },
   defaultVariants: {
@@ -32,23 +32,19 @@ const buttonVariants = cva("", {
   },
 });
 
+type ButtonProps = ButtonPrimitive.Props & VariantProps<typeof buttonVariants>;
+
 function Button({
   className,
   variant = "default",
   size = "default",
   color = "default",
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonProps) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(
-        classes.root,
-        classes[`color--${color}`],
-        classes[`variant--${variant}`],
-        classes[`size--${size}`],
-        className,
-      )}
+      className={cn(buttonVariants({ color, variant, size }), className)}
       {...props}
     />
   );

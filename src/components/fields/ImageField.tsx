@@ -91,7 +91,7 @@ export const ImageField = <T extends FieldValues>(
     );
   };
 
-  const inputId = `image-${name}-${label}`;
+  const inputId = `field-${name}`;
 
   return (
     <Field

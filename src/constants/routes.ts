@@ -2,7 +2,7 @@ const HOME = "/";
 const BLOGS = "/blogs";
 const APP = "/app";
 const FEEDBACK = "/feedback";
-const ADMIN_DASHBOARD = "admin-dashboard";
+const ADMIN_DASHBOARD = "/admin-dashboard";
 
 export const ROUTES = {
   HOME,
@@ -11,3 +11,5 @@ export const ROUTES = {
   FEEDBACK,
   ADMIN_DASHBOARD,
 } as const;
+
+export const getBlogPath = (blogId: string) => `${BLOGS}/${blogId}`;

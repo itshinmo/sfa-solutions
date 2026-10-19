@@ -21,18 +21,20 @@ export const TextareaField = <T extends FieldValues>(
 
   const { field, fieldState } = useController({ name });
 
+  const textareaId = `field-${name}`;
+
   return (
     <Field
       data-invalid={fieldState.invalid}
       orientation="responsive"
     >
-      <FieldLabel htmlFor={`textarea-${name}-${label}`}>{label}</FieldLabel>
+      <FieldLabel htmlFor={textareaId}>{label}</FieldLabel>
 
       {description && <FieldDescription>{description}</FieldDescription>}
 
       <Textarea
         {...field}
-        id={`textarea-${name}-${label}`}
+        id={textareaId}
         aria-invalid={fieldState.invalid}
         placeholder={placeholder}
       />

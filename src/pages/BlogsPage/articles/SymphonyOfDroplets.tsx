@@ -36,7 +36,7 @@ const SymphonyOfDroplets = () => {
         </p>
       </section>
 
-      <div className="mx-auto w-xl">
+      <div className="blogcontainer mx-auto w-full">
         <div className="image-container">
           <img
             src={img1}
@@ -80,7 +80,7 @@ const SymphonyOfDroplets = () => {
         </p>
       </section>
 
-      <div className="mx-auto w-xl">
+      <div className="blogcontainer mx-auto w-full">
         <div className="image-container">
           <img
             src={img2}
@@ -128,7 +128,7 @@ const SymphonyOfDroplets = () => {
         </p>
       </section>
 
-      <div className="mx-auto w-xl">
+      <div className="blogcontainer mx-auto w-full">
         <div className="image-container">
           <img
             src={img3}
