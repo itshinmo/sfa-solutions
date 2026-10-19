@@ -21,18 +21,20 @@ export const InputField = <T extends FieldValues>(
 
   const { field, fieldState } = useController({ name });
 
+  const inputId = `field-${name}`;
+
   return (
     <Field
       data-invalid={fieldState.invalid}
       orientation="responsive"
     >
-      <FieldLabel htmlFor={`input-${name}-${label}`}>{label}</FieldLabel>
+      <FieldLabel htmlFor={inputId}>{label}</FieldLabel>
 
       {description && <FieldDescription>{description}</FieldDescription>}
 
       <Input
         {...field}
-        id={`input-${name}-${label}`}
+        id={inputId}
         aria-invalid={fieldState.invalid}
         placeholder={placeholder}
       />

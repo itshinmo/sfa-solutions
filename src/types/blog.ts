@@ -1,9 +1,9 @@
-import type { JSX } from "react";
+import type { ComponentType, LazyExoticComponent } from "react";
 
-export type BlogData = {
+export type Blog = {
   id: string;
   title: string;
   description: string;
-  component: JSX.Element;
-  thumbnail?: string;
+  thumbnail: string;
+  Component: LazyExoticComponent<ComponentType>;
 };

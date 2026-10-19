@@ -200,7 +200,7 @@ html[lang="fa"] {
     width: 100%;
   }
   #root {
-    @apply primary-gradient isolate w-screen;
+    @apply primary-gradient isolate w-full;
     width: 100%;
   }
   body {
@@ -219,11 +219,7 @@ html[lang="fa"] {
   }
 
   #main-layout > main {
-    min-height: var(--main-height);
-  }
-
-  #main-layout > footer {
-    height: var(--footer-height);
+    flex: 1;
   }
 }
 
@@ -285,4 +281,10 @@ html[lang="fa"] {
 
 @utility animate-team-scroll {
   animation: team-scroll 35s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-team-scroll {
+    animation: none;
+  }
 }

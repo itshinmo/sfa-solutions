@@ -4,7 +4,7 @@ import swri from "@/assets/swri.png";
 import { TeamIcon } from "@/components/TeamIcon";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-import { useIsMobile } from "@/hooks";
+import { SITE } from "@/constants/site";
 import { cn } from "@/utils";
 import type { JSX } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,15 +17,39 @@ import { MdPeopleAlt } from "react-icons/md";
 
 type FooterButtonProps = {
   icon: JSX.Element;
+  label: string;
+  href?: string;
 };
 
 const FooterButton = (props: FooterButtonProps) => {
-  const { icon } = props;
+  const { href, icon, label } = props;
+
+  const className = "bg-footer-icon-background!";
+
+  if (href) {
+    return (
+      <Button
+        nativeButton={false}
+        render={
+          <a
+            href={href}
+            aria-label={label}
+          />
+        }
+        size="icon-lg"
+        className={className}
+      >
+        {icon}
+      </Button>
+    );
+  }
 
   return (
     <Button
-      className="bg-footer-icon-background!"
+      type="button"
       size="icon-lg"
+      className={className}
+      aria-label={label}
     >
       {icon}
     </Button>
@@ -48,20 +72,32 @@ const FooterInfo = (props: FooterInfoProps) => {
   );
 };
 
-export const Footer = () => {
-  const isMobile = useIsMobile();
+const PARTNER_LOGOS = [
+  {
+    src: bpjLight,
+    alt: "Young Researchers Club logo",
+    wrapperClassName: "h-20 sm:h-24",
+  },
+  {
+    src: srbiau,
+    alt: "Islamic Azad University, Science and Research Branch logo",
+    wrapperClassName: "h-20 sm:h-24",
+  },
+  {
+    src: swri,
+    alt: "Soil and Water Research Institute logo",
+    wrapperClassName:
+      "h-20 overflow-hidden rounded-full border bg-white p-1 sm:h-24",
+  },
+] as const;
 
+export const Footer = () => {
   const { t } = useTranslation(["common", "footer"]);
 
   return (
-    <footer className="bg-footer-background text-footer-foreground px-5 py-10">
-      <div
-        className={cn(
-          "flex justify-between",
-          isMobile ? "flex-col gap-y-12" : "flex-row",
-        )}
-      >
-        <section className="flex w-full flex-col gap-y-4">
+    <footer className="bg-footer-background text-footer-foreground w-full py-10">
+      <div className="maincontainer grid gap-10 md:grid-cols-2">
+        <section className="flex flex-col gap-y-4">
           <div className="flex flex-row items-center gap-x-3">
             <div className="border-primary overflow-hidden rounded-xl border-2">
               <TeamIcon className="size-8" />
@@ -73,26 +109,32 @@ export const Footer = () => {
             {`${t("sfa")}: ${t("slogan-2")}`}
           </p>
 
+          {/* TODO: wire these to the official social profiles. */}
           <div className="flex flex-row items-center gap-x-2.5">
             <FooterButton
+              label={t("social-facebook")}
               icon={<FaFacebook className="fill-footer-icon-foreground" />}
             />
 
             <FooterButton
+              label={t("social-community")}
               icon={<MdPeopleAlt className="fill-footer-icon-foreground" />}
             />
 
             <FooterButton
+              label={t("social-website")}
               icon={<IoLink className="stroke-footer-icon-foreground" />}
             />
 
             <FooterButton
+              label={t("social-email")}
+              href={`mailto:${SITE.email}`}
               icon={<IoMdMail className="fill-footer-icon-foreground" />}
             />
           </div>
         </section>
 
-        <section className="flex w-full flex-col gap-y-4">
+        <section className="flex flex-col gap-y-4">
           <h4 className="h4 text-white">{t("footer:contact-info")}</h4>
 
           <div className="flex flex-col gap-y-2">
@@ -103,12 +145,12 @@ export const Footer = () => {
 
             <FooterInfo
               icon={<IoMdMail className="fill-primary" />}
-              title="info@sfa.com"
+              title={SITE.email}
             />
 
             <FooterInfo
               icon={<IoCall className="fill-primary" />}
-              title="+98"
+              title={SITE.phone}
             />
 
             <FooterInfo
@@ -119,49 +161,35 @@ export const Footer = () => {
         </section>
       </div>
 
-      <div
-        className={cn(
-          "flex h-24 flex-row items-center gap-x-2",
-          isMobile ? "mt-6 justify-center" : undefined,
-        )}
-      >
-        <div className="h-full">
-          <div className="image-container">
-            <img
-              src={bpjLight}
-              alt="young researchers club logo"
-            />
+      <div className="maincontainer mt-10 flex flex-wrap items-center justify-center gap-4 md:justify-start">
+        {PARTNER_LOGOS.map(logo => (
+          <div
+            key={logo.alt}
+            className={cn("shrink-0", logo.wrapperClassName)}
+          >
+            <div className="image-container">
+              <img
+                src={logo.src}
+                alt={logo.alt}
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
           </div>
-        </div>
-
-        <div className="h-full">
-          <div className="image-container">
-            <img
-              src={srbiau}
-              alt="islamic azad university, science and research branch logo"
-            />
-          </div>
-        </div>
-
-        <div className="h-full overflow-hidden rounded-full border bg-white p-1">
-          <div className="image-container">
-            <img
-              src={swri}
-              alt="soil and water research institude logo"
-            />
-          </div>
-        </div>
+        ))}
       </div>
 
-      <Separator
-        orientation="horizontal"
-        className="bg-footer-icon-background mt-16 mb-8 h-px"
-      />
+      <div className="maincontainer">
+        <Separator
+          orientation="horizontal"
+          className="bg-footer-icon-background mt-12 mb-8 h-px"
+        />
 
-      <div className="mb-12 flex w-full flex-row items-center justify-center gap-x-2 text-center text-sm brightness-60">
-        <FaCopyright />
+        <div className="flex w-full flex-row items-center justify-center gap-x-2 text-center text-sm brightness-60">
+          <FaCopyright />
 
-        <span className="p m-0!">{t("footer:rights-reserved")}</span>
+          <span className="p m-0!">{t("footer:rights-reserved")}</span>
+        </div>
       </div>
     </footer>
   );

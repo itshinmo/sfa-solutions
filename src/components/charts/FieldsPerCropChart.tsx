@@ -50,7 +50,7 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export const FieldsPerCropChart = () => {
-  const totalVisitors = React.useMemo(() => {
+  const totalFields = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.fields, 0);
   }, []);
 
@@ -93,7 +93,7 @@ export const FieldsPerCropChart = () => {
                           y={viewBox.cy}
                           className="fill-foreground text-3xl font-bold"
                         >
-                          {totalVisitors.toLocaleString()}
+                          {totalFields.toLocaleString()}
                         </tspan>
                         <tspan
                           x={viewBox.cx}

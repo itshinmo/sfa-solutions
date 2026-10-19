@@ -29,6 +29,8 @@ export const SelectField = <T extends FieldValues>(
 
   const { field, fieldState } = useController({ name });
 
+  const selectId = `field-${name}`;
+
   const renderOptions = () => {
     return options.map(option => (
       <SelectItem
@@ -46,7 +48,7 @@ export const SelectField = <T extends FieldValues>(
       orientation="responsive"
       data-invalid={fieldState.invalid}
     >
-      <FieldLabel htmlFor={`select-${name}-${label}`}>{label}</FieldLabel>
+      <FieldLabel htmlFor={selectId}>{label}</FieldLabel>
 
       {description && <FieldDescription>{description}</FieldDescription>}
 
@@ -56,7 +58,7 @@ export const SelectField = <T extends FieldValues>(
         onValueChange={field.onChange}
       >
         <SelectTrigger
-          id={`select-${name}-${label}`}
+          id={selectId}
           aria-invalid={fieldState.invalid}
         >
           <SelectValue placeholder={placeholder}>

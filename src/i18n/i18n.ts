@@ -2,59 +2,49 @@ import i18n from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 
-// English
-import enAchievement from "./locales/en/achievement-section.json";
-import enCommon from "./locales/en/common.json";
-import enFooter from "./locales/en/footer.json";
-import enResearchSection from "./locales/en/research-section.json";
-import enSfaSection from "./locales/en/sfa-section.json";
-import enTeamSection from "./locales/en/team-section.json";
+import {
+  resources,
+  SUPPORTED_LANGUAGES,
+  type SupportedLanguage,
+} from "./resources";
 
-// Persian
-import faAchievement from "./locales/fa/achievement-section.json";
-import faCommon from "./locales/fa/common.json";
-import faFooter from "./locales/fa/footer.json";
-import faResearchSection from "./locales/fa/research-section.json";
-import faSfaSection from "./locales/fa/sfa-section.json";
-import faTeamSection from "./locales/fa/team-section.json";
+const DEFAULT_LANGUAGE: SupportedLanguage = "en";
+
+export const isRtlLanguage = (language: string) => language === "fa";
+
+/**
+ * Keep the document language/direction in sync with i18next.
+ *
+ * This is applied synchronously during initialisation (instead of in a
+ * `useEffect`) so the first paint already has the correct direction — which
+ * avoids the RTL/LTR flash on reload and Fast Refresh.
+ */
+const applyDocumentLanguage = (language: string) => {
+  if (typeof document === "undefined") {
+    return;
+  }
+
+  const resolvedLanguage = (SUPPORTED_LANGUAGES as readonly string[]).includes(
+    language,
+  )
+    ? language
+    : DEFAULT_LANGUAGE;
+
+  document.documentElement.lang = resolvedLanguage;
+  document.documentElement.dir = isRtlLanguage(resolvedLanguage)
+    ? "rtl"
+    : "ltr";
+};
 
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources: {
-      en: {
-        common: enCommon,
-        "sfa-section": enSfaSection,
-        "research-section": enResearchSection,
-        "team-section": enTeamSection,
-        footer: enFooter,
-        "achievement-section": enAchievement,
-      },
-
-      fa: {
-        common: faCommon,
-        "sfa-section": faSfaSection,
-        "research-section": faResearchSection,
-        "team-section": faTeamSection,
-        footer: faFooter,
-        "achievement-section": faAchievement,
-      },
-    },
-
-    ns: [
-      "common",
-      "footer",
-      "research-section",
-      "sfa-section",
-      "team-section",
-      "achievement-section",
-    ],
+    resources,
+    supportedLngs: [...SUPPORTED_LANGUAGES],
+    fallbackLng: DEFAULT_LANGUAGE,
     defaultNS: "common",
-
-    supportedLngs: ["en", "fa"],
-    fallbackLng: "en",
-
+    ns: Object.keys(resources.en),
     interpolation: {
       escapeValue: false,
     },
@@ -64,4 +54,11 @@ i18n
     },
   });
 
+applyDocumentLanguage(
+  i18n.resolvedLanguage ?? i18n.language ?? DEFAULT_LANGUAGE,
+);
+
+i18n.on("languageChanged", applyDocumentLanguage);
+
+export { i18n };
 export default i18n;

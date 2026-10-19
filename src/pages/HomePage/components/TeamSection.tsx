@@ -8,9 +8,13 @@ import soheilMehriziImg from "@/assets/team/Soheil.png";
 import { Card, CardContent } from "@/components/ui/card";
 import { useIsMobile } from "@/hooks";
 import { cn } from "@/utils";
-import { Button } from "@base-ui/react";
-import { motion, useAnimationFrame, useMotionValue } from "motion/react";
-import { useMemo, useRef } from "react";
+import {
+  motion,
+  useAnimationFrame,
+  useMotionValue,
+  useReducedMotion,
+} from "motion/react";
+import { useMemo, useRef, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { AiOutlineGlobal } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
@@ -28,6 +32,26 @@ type TeamCardProps = {
   };
 };
 
+const TeamMediaLink = (props: {
+  href: string;
+  label: string;
+  children: ReactNode;
+}) => {
+  const { children, href, label } = props;
+
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={label}
+      className="focus-visible:ring-ring rounded-md transition-transform hover:-translate-y-0.5 focus-visible:ring-2 focus-visible:outline-none"
+    >
+      {children}
+    </a>
+  );
+};
+
 const TeamCard = (props: TeamCardProps) => {
   const { description, title, name, media, image } = props;
 
@@ -40,28 +64,30 @@ const TeamCard = (props: TeamCardProps) => {
         {media && (
           <div className="absolute top-0 right-4 flex flex-col gap-y-2">
             {media.linkedin && (
-              <Button onClick={() => window.open(media.linkedin, "_blank")}>
-                <FaLinkedin className="fill-ring size-6 cursor-pointer hover:fill-[#126ac4]" />
-              </Button>
+              <TeamMediaLink
+                href={media.linkedin}
+                label={`${name} on LinkedIn`}
+              >
+                <FaLinkedin className="fill-ring size-6 hover:fill-[#126ac4]" />
+              </TeamMediaLink>
             )}
 
             {media.email && (
-              <Button
-                onClick={() => {
-                  window.open(
-                    `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(media.email!)}`,
-                    "_blank",
-                  );
-                }}
+              <TeamMediaLink
+                href={`mailto:${media.email}`}
+                label={`Email ${name}`}
               >
-                <IoIosMail className="fill-ring size-6 cursor-pointer hover:fill-[#dd4234]" />
-              </Button>
+                <IoIosMail className="fill-ring size-6 hover:fill-[#dd4234]" />
+              </TeamMediaLink>
             )}
 
             {media.website && (
-              <Button onClick={() => window.open(media.website, "_blank")}>
-                <AiOutlineGlobal className="fill-ring hover:fill-foreground size-6 cursor-pointer" />
-              </Button>
+              <TeamMediaLink
+                href={media.website}
+                label={`${name} website`}
+              >
+                <AiOutlineGlobal className="fill-ring hover:fill-foreground size-6" />
+              </TeamMediaLink>
             )}
           </div>
         )}
@@ -71,6 +97,8 @@ const TeamCard = (props: TeamCardProps) => {
             <img
               src={image}
               alt={`${name}'s avatar`}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -86,7 +114,7 @@ const TeamCard = (props: TeamCardProps) => {
 };
 
 type TeamMobileCarouselProps = {
-  children: React.ReactNode;
+  children: ReactNode;
 };
 
 const TeamMobileCarousel = ({ children }: TeamMobileCarouselProps) => {
@@ -95,12 +123,13 @@ const TeamMobileCarousel = ({ children }: TeamMobileCarouselProps) => {
   const x = useMotionValue(-20);
 
   const isDragging = useRef(false);
+  const shouldReduceMotion = useReducedMotion();
 
-  // auto scroll speed
+  // Auto-scroll speed in pixels per frame.
   const speed = 0.5;
 
   useAnimationFrame(() => {
-    if (isDragging.current) return;
+    if (isDragging.current || shouldReduceMotion) return;
 
     const container = containerRef.current;
 
@@ -108,17 +137,15 @@ const TeamMobileCarousel = ({ children }: TeamMobileCarouselProps) => {
 
     const currentX = x.get();
 
-    // width of one full set
+    // Width of one full set.
     const scrollWidth = container.scrollWidth / 2;
 
     let next = currentX - speed;
 
-    // seamless loop LEFT
     if (next <= -scrollWidth) {
       next += scrollWidth;
     }
 
-    // seamless loop RIGHT
     if (next >= 0) {
       next -= scrollWidth;
     }
@@ -128,10 +155,8 @@ const TeamMobileCarousel = ({ children }: TeamMobileCarouselProps) => {
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Left Fade */}
       <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-12 bg-linear-to-r to-transparent" />
 
-      {/* Right Fade */}
       <div className="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-12 bg-linear-to-l to-transparent" />
 
       <motion.div
@@ -157,12 +182,10 @@ const TeamMobileCarousel = ({ children }: TeamMobileCarouselProps) => {
 
           let next = x.get() + info.delta.x;
 
-          // seamless loop LEFT
           if (next <= -scrollWidth) {
             next += scrollWidth;
           }
 
-          // seamless loop RIGHT
           if (next >= 0) {
             next -= scrollWidth;
           }
@@ -269,25 +292,23 @@ export const TeamSection = ({ className }: TeamSectionProps) => {
 
       {isMobile ? (
         <TeamMobileCarousel>
-          {teamMembers.map((member, index) => (
+          {teamMembers.map(member => (
             <TeamCard
-              key={index}
+              key={member.name}
               {...member}
             />
           ))}
         </TeamMobileCarousel>
       ) : (
         <div className="relative w-full overflow-hidden">
-          {/* Left Fade */}
           <div className="from-background pointer-events-none absolute top-0 left-0 z-10 h-full w-24 bg-linear-to-r to-transparent" />
 
-          {/* Right Fade */}
           <div className="from-background pointer-events-none absolute top-0 right-0 z-10 h-full w-24 bg-linear-to-l to-transparent" />
 
           <div className="animate-team-scroll hover:paused my-1 flex w-max gap-4">
             {[...teamMembers, ...teamMembers].map((member, index) => (
               <TeamCard
-                key={index}
+                key={`${member.name}-${index}`}
                 {...member}
               />
             ))}

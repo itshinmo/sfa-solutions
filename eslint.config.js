@@ -22,14 +22,6 @@ export default defineConfig([
       prettier: prettierPlugin,
     },
 
-    settings: {
-      "import/resolver": {
-        typescript: {
-          alwaysTryTypes: true,
-        },
-      },
-    },
-
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,

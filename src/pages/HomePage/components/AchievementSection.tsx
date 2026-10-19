@@ -1,35 +1,29 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/utils";
-import { motion } from "framer-motion";
-import { useMemo } from "react";
+import { motion } from "motion/react";
 import { useTranslation } from "react-i18next";
 
 type AchievementCardProps = {
   idx: string;
   title: string;
   description: string;
+  delay?: number;
 };
 
 const AchievementCard = (props: AchievementCardProps) => {
-  const { description, title, idx } = props;
+  const { description, title, idx, delay = 0 } = props;
 
   return (
     <motion.div
-      className="w-[28rem]"
+      className="w-full max-w-[28rem]"
       initial={{ opacity: 0, y: 24, scale: 0.96 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{
-        once: true, // animate only first time
-        amount: 0.35,
-      }}
-      transition={{
-        duration: 0.75,
-        ease: "easeOut",
-      }}
+      viewport={{ once: true, amount: 0.35 }}
+      transition={{ duration: 0.75, delay, ease: "easeOut" }}
     >
       <Card className="w-full">
         <CardContent className="flex flex-row gap-x-3">
-          <div className="flex aspect-square size-8 items-center justify-center">
+          <div className="flex aspect-square size-8 shrink-0 items-center justify-center">
             <span className="bg-primary text-primary-foreground flex size-8 items-center justify-center rounded-full font-black">
               {idx}
             </span>
@@ -38,7 +32,7 @@ const AchievementCard = (props: AchievementCardProps) => {
           <div className="flex flex-col">
             <h5 className="h4 mb-2">{title}</h5>
 
-            <p className="">{description}</p>
+            <p>{description}</p>
           </div>
         </CardContent>
       </Card>
@@ -50,46 +44,17 @@ type AchievementSectionProps = {
   className?: string;
 };
 
+const ACHIEVEMENTS = [
+  { idx: "I", titleKey: "1title", descriptionKey: "1description" },
+  { idx: "II", titleKey: "2title", descriptionKey: "2description" },
+  { idx: "III", titleKey: "3title", descriptionKey: "3description" },
+  { idx: "IV", titleKey: "4title", descriptionKey: "4description" },
+] as const;
+
 export const AchievementSection = (props: AchievementSectionProps) => {
   const { className } = props;
 
   const { t } = useTranslation(["common", "achievement-section"]);
-
-  const achievementList: AchievementCardProps[] = useMemo(() => {
-    return [
-      {
-        idx: "I",
-        title: t("achievement-section:1title"),
-        description: t("achievement-section:1description"),
-      },
-      {
-        idx: "II",
-        title: t("achievement-section:2title"),
-        description: t("achievement-section:2description"),
-      },
-      {
-        idx: "III",
-        title: t("achievement-section:3title"),
-        description: t("achievement-section:3description"),
-      },
-      {
-        idx: "IV",
-        title: t("achievement-section:4title"),
-        description: t("achievement-section:4description"),
-      },
-    ];
-  }, [t]);
-
-  const renderAchievements = () => {
-    return achievementList.map((achievement, idx) => (
-      <AchievementCard
-        key={`${idx}-${achievement.idx}`}
-        idx={achievement.idx}
-        description={achievement.description}
-        title={achievement.title}
-      />
-    ));
-  };
 
   return (
     <section
@@ -98,10 +63,18 @@ export const AchievementSection = (props: AchievementSectionProps) => {
         className,
       )}
     >
-      <h2 className="h1 mb-12">{"Achievements"}</h2>
+      <h2 className="h1 mb-12">{t("achievements")}</h2>
 
       <div className="flex max-w-6xl flex-row flex-wrap items-center justify-center gap-4">
-        {renderAchievements()}
+        {ACHIEVEMENTS.map((achievement, index) => (
+          <AchievementCard
+            key={achievement.idx}
+            idx={achievement.idx}
+            delay={index * 0.1}
+            description={t(`achievement-section:${achievement.descriptionKey}`)}
+            title={t(`achievement-section:${achievement.titleKey}`)}
+          />
+        ))}
       </div>
     </section>
   );

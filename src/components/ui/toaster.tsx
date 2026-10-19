@@ -1,15 +1,13 @@
-import { useTheme } from "next-themes";
+import type { CSSProperties } from "react";
 import { CiCircleCheck, CiCircleInfo } from "react-icons/ci";
 import { FiAlertTriangle, FiLoader } from "react-icons/fi";
 import { LuOctagonX } from "react-icons/lu";
 import { Toaster as Sonner, type ToasterProps } from "sonner";
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme();
-
   return (
     <Sonner
-      theme={theme as ToasterProps["theme"]}
+      theme="system"
       className="toaster group"
       icons={{
         success: <CiCircleCheck className="size-4" />,
@@ -24,7 +22,7 @@ const Toaster = ({ ...props }: ToasterProps) => {
           "--normal-text": "var(--popover-foreground)",
           "--normal-border": "var(--border)",
           "--border-radius": "var(--radius)",
-        } as React.CSSProperties
+        } as CSSProperties
       }
       toastOptions={{
         classNames: {
