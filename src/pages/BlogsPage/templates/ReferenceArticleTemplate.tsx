@@ -1,12 +1,21 @@
-import STTThumbnail from "@/assets/blogs/soil-texture-triangle/thumbnail.jpeg";
 import { useBlogContent } from "@/hooks";
-import type { ReferenceArticleContent } from "@/types/blog";
+import type {
+  BlogContentNamespace,
+  ReferenceArticleContent,
+} from "@/types/blog";
 import { useTranslation } from "react-i18next";
 
-const CONTENT_NAMESPACE = "blog-soil-texture-triangle";
+type Props = {
+  namespace: BlogContentNamespace;
+  coverImage?: string;
+};
 
-const SoilTextureTriangle = () => {
-  const content = useBlogContent<ReferenceArticleContent>(CONTENT_NAMESPACE);
+/**
+ * Template for structured reference articles: intro, cover image, and grouped
+ * sections with optional management notes.
+ */
+export const ReferenceArticleTemplate = ({ coverImage, namespace }: Props) => {
+  const content = useBlogContent<ReferenceArticleContent>(namespace);
 
   const { t } = useTranslation("blog");
 
@@ -24,14 +33,16 @@ const SoilTextureTriangle = () => {
           </p>
         ))}
 
-        <div className="mx-auto w-full max-w-xs">
-          <div className="image-container">
-            <img
-              src={STTThumbnail}
-              alt={content.coverAlt}
-            />
+        {coverImage && (
+          <div className="mx-auto w-full max-w-xs">
+            <div className="image-container">
+              <img
+                src={coverImage}
+                alt={content.coverAlt}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {content.sections.map(section => (
@@ -77,5 +88,3 @@ const SoilTextureTriangle = () => {
     </main>
   );
 };
-
-export default SoilTextureTriangle;

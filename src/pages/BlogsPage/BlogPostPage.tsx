@@ -3,6 +3,7 @@ import { useBlogContent, usePageTitle } from "@/hooks";
 import { NotFoundContent } from "@/pages/NotFoundPage/NotFoundContent";
 import type { Blog } from "@/types/blog";
 import { useParams } from "react-router";
+import { BlogTemplateRenderer } from "./templates";
 
 type BlogArticleProps = {
   blog: Blog;
@@ -15,9 +16,7 @@ const BlogArticle = ({ blog }: BlogArticleProps) => {
 
   usePageTitle(content.title, content.description);
 
-  const { Component } = blog;
-
-  return <Component />;
+  return <BlogTemplateRenderer blog={blog} />;
 };
 
 export const BlogPostPage = () => {

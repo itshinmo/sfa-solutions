@@ -92,8 +92,8 @@ src/
 ├── lib/               # App-wide singletons (QueryClient)
 ├── pages/             # Route-level pages
 │   ├── BlogsPage/
-│   │   ├── articles/  # Lazy-loaded blog articles
-│   │   └── components/
+│   │   ├── components/  # Cards and page-level pieces
+│   │   └── templates/   # reference/narrative/simple article layouts
 │   ├── HomePage/
 │   └── NotFoundPage/
 ├── services/          # Backend API calls
@@ -102,8 +102,7 @@ src/
 └── utils/             # `cn()` and other helpers
 ```
 
-Route-level pages other than the home page are code-split, and blog articles are
-lazy-loaded on demand.
+Route-level pages other than the home page are code-split.
 
 ## Internationalization
 
@@ -112,6 +111,28 @@ lazy-loaded on demand.
   instance, so RTL does not flash on reload or Fast Refresh.
 - Add new namespaces to `src/i18n/resources.ts`; the English resources are the
   source of truth for typed `t()` keys.
+
+## Adding a blog
+
+Blogs are data-driven: the layout comes from a template, while the text lives in
+the i18n resources.
+
+1. Add the article content to both locales:
+   - `src/i18n/locales/en/blog/my-article.json`
+   - `src/i18n/locales/fa/blog/my-article.json`
+2. Register the namespace in `src/i18n/resources.ts` (for both languages).
+3. Add an entry to `BLOGS` in `src/constants/blogs.ts`:
+   - `contentNamespace`: the i18n namespace, e.g. `blog-my-article`
+   - `template`: `reference`, `narrative`, or `simple`
+   - `thumbnail` (and `images` for narrative articles)
+4. Choose the content shape that matches the template:
+   - `reference`: `intro`, `coverAlt`, and grouped `sections`/`subsections` with
+     optional `management` notes.
+   - `narrative`: `intro` plus ordered blocks (`paragraph`, `heading`, `image`).
+   - `simple`: `intro` plus titled `sections` of paragraphs.
+
+No page or template changes are needed when adding another article of an
+existing template type.
 
 ## Notes / known limitations
 
