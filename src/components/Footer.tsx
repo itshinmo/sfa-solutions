@@ -1,4 +1,3 @@
-import bpjLight from "@/assets/bpj-light.png";
 import srbiau from "@/assets/srbiau.png";
 import swri from "@/assets/swri.png";
 import { TeamIcon } from "@/components/TeamIcon";
@@ -73,11 +72,6 @@ const FooterInfo = (props: FooterInfoProps) => {
 };
 
 const PARTNER_LOGOS = [
-  {
-    src: bpjLight,
-    alt: "Young Researchers Club logo",
-    wrapperClassName: "h-20 sm:h-24",
-  },
   {
     src: srbiau,
     alt: "Islamic Azad University, Science and Research Branch logo",
