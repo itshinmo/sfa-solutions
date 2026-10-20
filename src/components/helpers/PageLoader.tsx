@@ -8,9 +8,10 @@ export const PageLoader = () => {
     <div
       role="status"
       aria-live="polite"
-      className="flex min-h-[50vh] w-full items-center justify-center"
+      aria-busy="true"
+      className="bg-background fixed inset-0 z-50 flex h-svh w-full items-center justify-center"
     >
-      <FiLoader className="text-primary size-8 animate-spin" />
+      <FiLoader className="text-primary size-10 animate-spin" />
       <span className="sr-only">{t("loading")}</span>
     </div>
   );
