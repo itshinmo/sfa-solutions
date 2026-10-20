@@ -1,14 +1,15 @@
-import type { ComponentType, LazyExoticComponent } from "react";
+import type { Namespace } from "@/i18n/resources";
 
-export type BlogContentNamespace =
-  | "blog-soil-texture-triangle"
-  | "blog-symphony-of-droplets";
+export type BlogContentNamespace = Extract<Namespace, `blog-${string}`>;
+
+export type BlogTemplate = "reference" | "narrative" | "simple";
 
 export type Blog = {
   id: string;
   thumbnail: string;
   contentNamespace: BlogContentNamespace;
-  Component: LazyExoticComponent<ComponentType>;
+  template: BlogTemplate;
+  images?: Partial<Record<NarrativeArticleImage, string>>;
 };
 
 export type ReferenceArticleSubsection = {
@@ -52,4 +53,16 @@ export type NarrativeArticleContent = {
   description: string;
   intro: string[];
   blocks: NarrativeArticleBlock[];
+};
+
+export type SimpleArticleSection = {
+  title: string;
+  paragraphs: string[];
+};
+
+export type SimpleArticleContent = {
+  title: string;
+  description: string;
+  intro: string[];
+  sections: SimpleArticleSection[];
 };

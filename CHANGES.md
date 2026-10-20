@@ -322,3 +322,21 @@ simulates a successful submission locally.
 - Added a localized “Management” label for the soil texture guide.
 - Added blog content types (`ReferenceArticleContent`,
   `NarrativeArticleContent`) to `src/types/blog.ts`.
+
+## Blog templates (follow-up)
+
+- Added a reusable template system under `src/pages/BlogsPage/templates/`:
+  - `ReferenceArticleTemplate` — intro, cover image, grouped sections and
+    subsections, with optional management notes.
+  - `NarrativeArticleTemplate` — intro followed by ordered paragraph, heading,
+    and image blocks.
+  - `SimpleArticleTemplate` — minimal intro + titled paragraph sections for
+    short posts.
+  - `BlogTemplateRenderer` — selects the template from blog metadata.
+- Blog metadata in `src/constants/blogs.ts` now declares a `template` and an
+  optional image map instead of a hardcoded article component.
+- `BlogPostPage` now renders the selected template for the article.
+- Removed the bespoke article components from `src/pages/BlogsPage/articles/`;
+  their layouts now live in the shared templates.
+- Documented the “add a blog” workflow in `README.md`, including the expected
+  content shape for each template.

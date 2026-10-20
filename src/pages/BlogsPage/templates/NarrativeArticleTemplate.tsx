@@ -1,22 +1,21 @@
-import img1 from "@/assets/blogs/symphony-of-droplets/image1.jpeg";
-import img2 from "@/assets/blogs/symphony-of-droplets/image2.jpeg";
-import img3 from "@/assets/blogs/symphony-of-droplets/image3.jpeg";
 import { useBlogContent } from "@/hooks";
 import type {
+  BlogContentNamespace,
   NarrativeArticleContent,
   NarrativeArticleImage,
 } from "@/types/blog";
 
-const CONTENT_NAMESPACE = "blog-symphony-of-droplets";
-
-const ARTICLE_IMAGES: Record<NarrativeArticleImage, string> = {
-  image1: img1,
-  image2: img2,
-  image3: img3,
+type Props = {
+  namespace: BlogContentNamespace;
+  images?: Partial<Record<NarrativeArticleImage, string>>;
 };
 
-const SymphonyOfDroplets = () => {
-  const content = useBlogContent<NarrativeArticleContent>(CONTENT_NAMESPACE);
+/**
+ * Template for narrative articles made of ordered blocks: paragraphs,
+ * headings, and images.
+ */
+export const NarrativeArticleTemplate = ({ images, namespace }: Props) => {
+  const content = useBlogContent<NarrativeArticleContent>(namespace);
 
   return (
     <main className="flex flex-col justify-center gap-y-8 py-12">
@@ -37,6 +36,12 @@ const SymphonyOfDroplets = () => {
         const key = `${block.type}-${index}`;
 
         if (block.type === "image") {
+          const image = images?.[block.image];
+
+          if (!image) {
+            return null;
+          }
+
           return (
             <div
               key={key}
@@ -44,7 +49,7 @@ const SymphonyOfDroplets = () => {
             >
               <div className="image-container">
                 <img
-                  src={ARTICLE_IMAGES[block.image]}
+                  src={image}
                   alt={block.alt}
                 />
               </div>
@@ -75,5 +80,3 @@ const SymphonyOfDroplets = () => {
     </main>
   );
 };
-
-export default SymphonyOfDroplets;

@@ -1,28 +1,30 @@
 import STTThumbnail from "@/assets/blogs/soil-texture-triangle/thumbnail.jpeg";
 import SODThumbnail from "@/assets/blogs/symphony-of-droplets/image1.jpeg";
+import SODImage2 from "@/assets/blogs/symphony-of-droplets/image2.jpeg";
+import SODImage3 from "@/assets/blogs/symphony-of-droplets/image3.jpeg";
 import type { Blog } from "@/types/blog";
-import { lazy } from "react";
 
 /**
- * Blog metadata. `Component` is lazy-loaded so article code and images are
- * only downloaded when a visitor opens the article.
+ * Blog metadata. `contentNamespace` points at the localized article content
+ * and `template` selects how that content is rendered.
  */
 export const BLOGS: readonly Blog[] = [
   {
     id: "soil-texture-triangle",
     contentNamespace: "blog-soil-texture-triangle",
-    Component: lazy(
-      () => import("@/pages/BlogsPage/articles/SoilTextureTriangle"),
-    ),
+    template: "reference",
     thumbnail: STTThumbnail,
   },
   {
     id: "symphony-of-droplets",
     contentNamespace: "blog-symphony-of-droplets",
-    Component: lazy(
-      () => import("@/pages/BlogsPage/articles/SymphonyOfDroplets"),
-    ),
+    template: "narrative",
     thumbnail: SODThumbnail,
+    images: {
+      image1: SODThumbnail,
+      image2: SODImage2,
+      image3: SODImage3,
+    },
   },
 ];
 
