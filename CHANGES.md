@@ -340,3 +340,10 @@ simulates a successful submission locally.
   their layouts now live in the shared templates.
 - Documented the “add a blog” workflow in `README.md`, including the expected
   content shape for each template.
+
+## Full-screen loading state (follow-up)
+
+- Updated `PageLoader` to cover the entire viewport (`fixed inset-0`) instead of
+  only half of it.
+- Added an opaque background and `aria-busy` so the fallback behaves
+  consistently in both LTR and RTL/Farsi layouts while lazy routes load.
