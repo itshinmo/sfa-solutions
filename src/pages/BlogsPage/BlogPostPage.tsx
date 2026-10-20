@@ -1,17 +1,29 @@
 import { getBlogById } from "@/constants/blogs";
-import { usePageTitle } from "@/hooks";
+import { useBlogContent, usePageTitle } from "@/hooks";
 import { NotFoundContent } from "@/pages/NotFoundPage/NotFoundContent";
-import { useTranslation } from "react-i18next";
+import type { Blog } from "@/types/blog";
 import { useParams } from "react-router";
+
+type BlogArticleProps = {
+  blog: Blog;
+};
+
+const BlogArticle = ({ blog }: BlogArticleProps) => {
+  const content = useBlogContent<{ title: string; description: string }>(
+    blog.contentNamespace,
+  );
+
+  usePageTitle(content.title, content.description);
+
+  const { Component } = blog;
+
+  return <Component />;
+};
 
 export const BlogPostPage = () => {
   const { blogId = "" } = useParams<{ blogId: string }>();
 
-  const { t } = useTranslation("common");
-
   const blog = getBlogById(blogId);
-
-  usePageTitle(blog?.title ?? t("not-found-title"), blog?.description);
 
   if (!blog) {
     return (
@@ -21,7 +33,5 @@ export const BlogPostPage = () => {
     );
   }
 
-  const { Component } = blog;
-
-  return <Component />;
+  return <BlogArticle blog={blog} />;
 };

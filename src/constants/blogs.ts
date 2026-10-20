@@ -10,9 +10,7 @@ import { lazy } from "react";
 export const BLOGS: readonly Blog[] = [
   {
     id: "soil-texture-triangle",
-    title: "Soil Texture Triangle",
-    description:
-      "A detailed guide to the 12 soil texture classes, explaining their physical properties, water behavior, irrigation needs, and effects on plant growth and root development.",
+    contentNamespace: "blog-soil-texture-triangle",
     Component: lazy(
       () => import("@/pages/BlogsPage/articles/SoilTextureTriangle"),
     ),
@@ -20,9 +18,7 @@ export const BLOGS: readonly Blog[] = [
   },
   {
     id: "symphony-of-droplets",
-    title: "Symphony of Droplets",
-    description:
-      "A deep exploration of irrigation evolution, showing how physics, engineering, and precision agriculture improve water efficiency from traditional surface irrigation to advanced drip and subsurface systems.",
+    contentNamespace: "blog-symphony-of-droplets",
     Component: lazy(
       () => import("@/pages/BlogsPage/articles/SymphonyOfDroplets"),
     ),
