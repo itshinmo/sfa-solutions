@@ -1,6 +1,8 @@
 // English
 import enAchievement from "./locales/en/achievement-section.json";
 import enBlog from "./locales/en/blog.json";
+import enSoilTextureTriangle from "./locales/en/blog/soil-texture-triangle.json";
+import enSymphonyOfDroplets from "./locales/en/blog/symphony-of-droplets.json";
 import enCommon from "./locales/en/common.json";
 import enFeedback from "./locales/en/feedback.json";
 import enFooter from "./locales/en/footer.json";
@@ -11,6 +13,8 @@ import enTeamSection from "./locales/en/team-section.json";
 // Persian
 import faAchievement from "./locales/fa/achievement-section.json";
 import faBlog from "./locales/fa/blog.json";
+import faSoilTextureTriangle from "./locales/fa/blog/soil-texture-triangle.json";
+import faSymphonyOfDroplets from "./locales/fa/blog/symphony-of-droplets.json";
 import faCommon from "./locales/fa/common.json";
 import faFeedback from "./locales/fa/feedback.json";
 import faFooter from "./locales/fa/footer.json";
@@ -31,6 +35,8 @@ export const defaultResources = {
   "sfa-section": enSfaSection,
   "team-section": enTeamSection,
   "achievement-section": enAchievement,
+  "blog-soil-texture-triangle": enSoilTextureTriangle,
+  "blog-symphony-of-droplets": enSymphonyOfDroplets,
 } as const;
 
 export const resources = {
@@ -44,6 +50,8 @@ export const resources = {
     "sfa-section": faSfaSection,
     "team-section": faTeamSection,
     "achievement-section": faAchievement,
+    "blog-soil-texture-triangle": faSoilTextureTriangle,
+    "blog-symphony-of-droplets": faSymphonyOfDroplets,
   },
 } as const;
 

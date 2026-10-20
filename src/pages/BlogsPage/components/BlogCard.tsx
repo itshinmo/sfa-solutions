@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { getBlogPath } from "@/constants/routes";
+import { useBlogContent } from "@/hooks";
 import type { Blog } from "@/types/blog";
 import { useTranslation } from "react-i18next";
 import { FaChevronRight } from "react-icons/fa";
@@ -11,7 +12,11 @@ type Props = {
 
 export const BlogCard = (props: Props) => {
   const { blog } = props;
-  const { description, id, title, thumbnail } = blog;
+  const { id, thumbnail } = blog;
+
+  const content = useBlogContent<{ title: string; description: string }>(
+    blog.contentNamespace,
+  );
 
   const { t } = useTranslation("common");
 
@@ -44,12 +49,12 @@ export const BlogCard = (props: Props) => {
                 to={href}
                 className="hover:underline"
               >
-                {title}
+                {content.title}
               </Link>
             </h2>
 
             <p className="text-description line-clamp-4 text-xs">
-              {description}
+              {content.description}
             </p>
           </div>
 

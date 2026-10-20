@@ -303,3 +303,22 @@ simulates a successful submission locally.
 - `yarn.lock` was not regenerated because the configured npm mirror returned 500
   errors during dependency removal. Run `yarn install` when the registry is
   reachable to prune the removed packages from the lockfile.
+
+## Blog localization (follow-up)
+
+- Added full English and Persian article content under:
+  - `src/i18n/locales/en/blog/soil-texture-triangle.json`
+  - `src/i18n/locales/fa/blog/soil-texture-triangle.json`
+  - `src/i18n/locales/en/blog/symphony-of-droplets.json`
+  - `src/i18n/locales/fa/blog/symphony-of-droplets.json`
+- Registered the article content as i18n namespaces:
+  - `blog-soil-texture-triangle`
+  - `blog-symphony-of-droplets`
+- Blog titles and descriptions are now read from i18n instead of being hardcoded
+  in `BLOGS`.
+- Added `useBlogContent()` to load the localized content bundle for an article.
+- Reworked both article components to render from the localized structured
+  content instead of hardcoded JSX text.
+- Added a localized “Management” label for the soil texture guide.
+- Added blog content types (`ReferenceArticleContent`,
+  `NarrativeArticleContent`) to `src/types/blog.ts`.
