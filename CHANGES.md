@@ -341,6 +341,11 @@ simulates a successful submission locally.
 - Documented the “add a blog” workflow in `README.md`, including the expected
   content shape for each template.
 
+## Footer cleanup (follow-up)
+
+- Removed the BPJ (Young Researchers Club) logo from the footer partner row.
+- Deleted the now-unused `bpj-light.png` and `bpj-dark.png` assets.
+
 ## Full-screen loading state (follow-up)
 
 - Updated `PageLoader` to cover the entire viewport (`fixed inset-0`) instead of
