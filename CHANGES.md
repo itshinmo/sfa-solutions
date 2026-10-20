@@ -341,6 +341,19 @@ simulates a successful submission locally.
 - Documented the “add a blog” workflow in `README.md`, including the expected
   content shape for each template.
 
+## Transparent header over the homepage hero (follow-up)
+
+- The header now starts transparent while the homepage hero is in view:
+  - light text, a white logo border, and a translucent language button;
+  - a subtle top gradient scrim over the hero keeps the header readable on
+    bright photos.
+- Once the hero scrolls past the header, it transitions to the solid
+  `background` surface with the normal dark text and a bottom border/shadow.
+- Added `useIsHeaderOverHero`, backed by `useSyncExternalStore` and an
+  `IntersectionObserver`, so the state updates without scroll listeners and
+  works in both LTR and RTL.
+- The header remains solid on all non-home routes.
+
 ## Footer cleanup (follow-up)
 
 - Removed the BPJ (Young Researchers Club) logo from the footer partner row.

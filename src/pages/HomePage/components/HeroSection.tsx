@@ -18,6 +18,7 @@ export const HeroSection = (props: HeroSectionProps) => {
 
   return (
     <section
+      id="home-hero"
       className={cn(
         "relative h-svh min-h-[40rem] w-full overflow-hidden",
         className,
@@ -40,6 +41,12 @@ export const HeroSection = (props: HeroSectionProps) => {
       </picture>
 
       <div className="absolute inset-0 bg-linear-to-b from-black/30 via-black/20 to-black/40" />
+
+      {/* Keeps the transparent header readable over bright areas of the photo. */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 top-0 z-10 h-44 bg-linear-to-b from-black/70 via-black/25 to-transparent"
+      />
 
       <div className="maincontainer relative z-20 flex w-full flex-col items-center justify-start gap-y-8 pt-32 text-center md:pt-48">
         <h1 className="h1 text-5xl text-white drop-shadow-lg sm:text-6xl md:text-7xl">
